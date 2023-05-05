@@ -1,0 +1,33 @@
+VERSION: 3.9
+
+services:
+  backend:
+    build: ./backend/Dockerfile
+    volumes:
+      -./backend/:/home/app
+    expose:
+      - 5000
+    environment:
+      - HOST="0.0.0.0"
+      - PORT="5000"
+      - API_KEY=""
+      - DB_HOST=""
+      - DB_PORT=""
+      - DB_USER=""
+      - DB_PASS=""
+      - DB_NAME=""
+      - JWT_SECRET=""
+      - CRIPTO_KEY=""
+      - CRIPTO_IV=""
+  
+  frontend:
+    build: ./frontend/Dockerfile
+    volumes:
+      -./frontend/:/home/app
+    expose:
+      - 3000
+    environment:
+      - HOST="0.0.0.0"
+      - PORT="3000"
+      - API_URL=""
+      - API_KEY=""
