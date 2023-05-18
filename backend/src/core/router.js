@@ -4,6 +4,6 @@ const router = Router();
 
 router.get('/', (req = request, res = response) => {
   res.send("works");
-})
+});
 
 export default router;
