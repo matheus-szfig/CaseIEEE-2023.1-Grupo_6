@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 
 const routes = [
-  {
-    path:'/',
-    element: <Home />
-  },
+  // {
+  //   path:'/exemplo',
+  //   element: <Exemplo />
+  // },
 ]
 
 function Router (props) {
