@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon --exec babel-node src/app.js",
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist",
+    "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
     "babel-node": "^0.0.1-security",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8"
   }
 }
