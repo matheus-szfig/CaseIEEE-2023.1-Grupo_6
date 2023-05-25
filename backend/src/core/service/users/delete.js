@@ -1,5 +1,5 @@
 
-import { database } from "../../../../config/database";
+import { database } from "../../../config/database";
 
 export async function deleteUserService(id) {
 	try {
