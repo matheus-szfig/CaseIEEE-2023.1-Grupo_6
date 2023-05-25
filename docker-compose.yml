@@ -3,8 +3,7 @@ VERSION: 3.9
 services:
   backend:
     build: ./backend/Dockerfile
-    volumes:
-      -./backend/:/home/app
+    volumes: -./backend/:/home/app
     expose:
       - 5000
     environment:
@@ -19,11 +18,10 @@ services:
       - JWT_SECRET=""
       - CRIPTO_KEY=""
       - CRIPTO_IV=""
-  
+
   frontend:
     build: ./frontend/Dockerfile
-    volumes:
-      -./frontend/:/home/app
+    volumes: -./frontend/:/home/app
     expose:
       - 3000
     environment:

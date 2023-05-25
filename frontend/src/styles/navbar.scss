@@ -1,10 +1,10 @@
-@import './base.scss';
+@import "./base.scss";
 
-.dropdown-toggle::after{
+.dropdown-toggle::after {
   display: none !important;
 }
 
-.drop-right{
+.drop-right {
   left: -75px;
 }
 

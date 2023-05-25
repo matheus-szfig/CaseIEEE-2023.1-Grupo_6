@@ -1,14 +1,16 @@
-import jwt from 'jsonwebtoken';
-import { request, response } from 'express';
+import jwt from "jsonwebtoken";
+import { request, response } from "express";
 
 export class PermissionsDealer {
-
-  static createToken (userInfo) {
-    const signed = jwt.sign(JSON.stringify(userInfo), process.env.JWT_KEY || "");
+  static createToken(userInfo) {
+    const signed = jwt.sign(
+      JSON.stringify(userInfo),
+      process.env.JWT_KEY || ""
+    );
     return signed;
   }
 
-  static verifyToken (token) {
+  static verifyToken(token) {
     try {
       const decodedToken = jwt.verify(token, process.env.JWT_KEY || "");
       const userInfo = decodedToken.userInfo;
@@ -17,5 +19,4 @@ export class PermissionsDealer {
       throw error;
     }
   }
-
 }
