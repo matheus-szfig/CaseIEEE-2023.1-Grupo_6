@@ -7,8 +7,8 @@ const app = exppress();
 const corsConfig = {
   origin: "*",
   credentials: true,
-  methods: ["POST", "GET", "PUT", "DELETE"]
-}
+  methods: ["POST", "GET", "PUT", "DELETE"],
+};
 
 app.use(cors(corsConfig));
 app.use(urlencoded({ extended: true }));
