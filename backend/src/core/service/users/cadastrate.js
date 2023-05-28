@@ -1,5 +1,5 @@
 import { database } from "../../../config/database";
-const bcrypt = require("bcryptjs")
+import { HashPassword } from "../../../utils/secure";
 
 
 export async function cadastrateUserService(email, senha,nome,senhaConfirmacao) {
@@ -15,8 +15,7 @@ export async function cadastrateUserService(email, senha,nome,senhaConfirmacao) 
 			throw new Error("Email adress alredy cadastrated!");
 		}
 
-        const hash = await bcrypt.hash(senha, 10) //estabelecer crypto_key
-        
+        const hash = await HashPassword(senha)
         await database("usuario").insert({
             email,
             senha: hash,
