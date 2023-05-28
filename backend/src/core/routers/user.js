@@ -7,7 +7,7 @@ const router_usuario = Router();
 
 router_usuario.get("/", GetUsers);
 router_usuario.delete("/delete/:id", DeleteUser);
-router_usuario.post("/user/cadaster", CadastrateUser);
+router_usuario.post("/cadaster", CadastrateUser);
 // router_usuario.get("/", GetUsuarios);
 // router_usuario.get("/", GetUsuarios);
 

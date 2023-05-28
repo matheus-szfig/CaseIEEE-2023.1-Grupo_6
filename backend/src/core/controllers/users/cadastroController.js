@@ -2,8 +2,8 @@ import { request, response } from "express";
 import { cadastrateUserService } from "../../service/users/cadastrate";
 
 export default async function CadastrateUser(req = request,res = response) {
-    const {name, email, password} = req.body
+    const {email, senha, nome, senhaConfirmacao} = req.body
 
-    const cadastrateService = await cadastrateUserService(email, password,name);
+    const cadastrateService = await cadastrateUserService(email, senha,nome, senhaConfirmacao);
 	res.json(cadastrateService);
 }
