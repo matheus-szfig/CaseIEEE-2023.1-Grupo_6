@@ -13,6 +13,5 @@ export function ComparePassword (password, hash) {
   const salt = hash.slice(64);
   const originalPassHash = hash.slice(0, 64);
   const currentPassHash = crypto.scryptSync(password, salt, 32).toString('hex');
-  console.log(salt, salt.length);
   return originalPassHash === currentPassHash;
 }
