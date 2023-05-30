@@ -1,0 +1,120 @@
+import { database } from "../../../config/database";
+import { ComparePassword } from "../../../utils/secure";
+import { CookieDealer } from "../../../utils/cookie";
+import jwt from "jsonwebtoken";
+
+export async function loginUserService(email, senha, res) {
+  try {
+    const user = await database("usuario").select("*").where({ email }).first();
+
+    //const permission = await database("v_p_usuario").select({"permissao":"descricao"}).where({ "id_usuario": user.id });
+
+    //const cargo = await database("v_c_usuario").select({ equipe , cargo , aprovado }).where({ "id_usuario": user.id });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const verifyPassword = await ComparePassword(senha, user.senha);
+
+    if (!verifyPassword) {
+      throw new Error("Invalid password");
+    }
+
+     const tokenPayload = {
+      UserInfo: {
+        id: user.id,
+        nome: user.name,
+        email: user.email,
+      }
+    };
+
+    const token = jwt.sign(tokenPayload, process.env.JWT_KEY || "", { expiresIn: "48h" });
+
+    // Configuração cookie
+    const cookieToken = CookieDealer.createToken(token);
+    res.cookie("access_token", cookieToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    return {
+      status: true,
+      message: "Login successful",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      status: false,
+      message: error.message,
+    };
+  }
+}
+
+
+
+
+/*import { database } from "../../../config/database";
+import { ComparePassword } from "../../../utils/secure";
+import { CookieDealer } from "../../../utils/cookie";
+import { PermissionsDealer } from "../../../utils/permissions";
+import jwt from "jsonwebtoken";
+
+export async function loginUserService(email, senha, res) {
+  try {
+    const user = await database("usuario").select("*").where({ email }).first();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const verifyPassword = await ComparePassword(senha, user.senha);
+
+    if (!verifyPassword) {
+      throw new Error("Invalid password");
+    }
+
+    const tokenPayload = {
+      UserInfo: {
+        id: user.id,
+        nome: user.name,
+        email: user.email,
+        permission: ['[descricao da permissao]'],
+        cargos: [
+          {
+            equipe: '[nome da equipe]',
+            cargo: '[cargo]'
+          }
+        ]
+      }
+    };
+
+    const token = jwt.sign(tokenPayload, process.env.JWT_KEY || "", { expiresIn: "48h" });
+
+    const cookieToken = CookieDealer.createToken(token);
+    const permissionToken = PermissionsDealer.createToken(tokenPayload);
+
+    // Configuração cookie
+    res.cookie("access_token", cookieToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    return {
+      status: true,
+      message: "Login successful",
+      id: user.id,
+      token: token,
+      cookieToken: cookieToken,
+      permissionToken: permissionToken,
+    };
+
+  } catch (error) {
+    console.log(error);
+    return {
+      status: false,
+      message: error.message,
+    };
+  }
+}*/
+

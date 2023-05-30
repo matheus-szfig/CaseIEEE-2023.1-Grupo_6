@@ -1,5 +1,5 @@
 import { request, response } from "express";
-import { deleteUserService } from "../service/users/delete";
+import { deleteUserService } from "../../service/users/delete";
 
 export default async function DeleteUser(req = request, res = response) {
 	const deleteId = req.params.id;
