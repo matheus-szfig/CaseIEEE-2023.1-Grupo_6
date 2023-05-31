@@ -1,38 +1,46 @@
 import { database } from "../../../config/database";
 import { HashPassword } from "../../../utils/secure";
 
-/*function verificaOpcao(valor, opcoes) {
+function verificaOpcao(valor, opcoes) {
 	return opcoes.some(opcao => opcao.nome === valor);
-}*/
+}
 
-export async function cadastrateUserService(email, senha,nome,senhaConfirmacao/*, equipes, cargos*/) {
+export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, equipes, cargos) {
 	try {
-		/*const equipeOpcoes = await database('equipe').select('nome');
+		const equipeOpcoes = await database('equipe').select('nome');
 		const cargoOpcoes = await database('cargo').select('nome');
 
-		if(equipes.lenght < 0 ||equipes.lenght > 3 ||cargos.lenght < 0 ||cargos.lenght > 3 ){
-			throw new Error("Informe de cargos ou equipes irregular");
+		if(JSON.stringify(equipes) === JSON.stringify(["", "", ""]) || equipes.length > 3 
+		|| JSON.stringify(cargos) === JSON.stringify(["", "", ""]) || cargos.length > 3){
+			throw new Error("Informe de cargos ou equipes irregular.");
 		}
 
         for(let i=0;i<3;i++){
-			verificaOpcao(cargos[i].toLowerCase(), cargoOpcoes)
-			if(!verificaOpcao){
+			if (cargos[i] === "") {
+				break;
+			}
+			const verificador = verificaOpcao(cargos[i].toLowerCase(), cargoOpcoes)
+			if(!verificador){
 				throw new Error("Cargo inválido");
 			}
 		}
 
 		for(let i=0;i<3;i++){
-			verificaOpcao(equipes[i].toLowerCase(), equipeOpcoes)
-			if(!verificaOpcao){
-				throw new Error("Cargo inválido");
+			if (cargos[i] === "") {
+				break;
 			}
-		}*/
+			const verificador = verificaOpcao(equipes[i].toLowerCase(), equipeOpcoes)
+			if(!verificador){
+				throw new Error("Equipe inválido");
+			}
+		}
 
 		if(senha.length<4){
             throw new Error("Too short password");
         }
 
         if(senha!==senhaConfirmacao){
+
             throw new Error("Passwords need to be equal");
         }
 
