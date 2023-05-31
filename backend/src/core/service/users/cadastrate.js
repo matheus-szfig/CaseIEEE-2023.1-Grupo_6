@@ -54,13 +54,23 @@ export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, 
             email,
             senha: hash,
             nome,
-			/*equipe1 : await database('equipe').select('id').where({nome : equipes[1]}),
-			cargo1  : await database('cargo').select('id').where({nome : cargos[1]}),
-			equipe2  : await database('equipe').select('id').where({nome : equipes[2]}),
-			cargo2  : await database('cargo').select('id').where({nome : cargos[2]}),
-			equipe3  : await database('equipe').select('id').where({nome : equipes[3]}),
-			cargo3  : await database('cargo').select('id').where({nome : cargos[3]})*/
         })
+
+		const idUser = await database('usuario').select('id').where({"email": email }).first();
+		for(let i=0;i<3;i++){
+			if (cargos[i] === "" || equipes[i] === "") {
+				break;
+			}
+			let cargoUser = await database('cargo').select('id').where({"nome" : cargos[i]}).first()
+			let equipesUser = await database('equipe').select('id').where({"nome" : equipes[i]}).first()
+			await database("usuario_equipe").insert({
+				id_usuario : idUser.id,
+				id_cargo : cargoUser.id,
+				id_equipe  : equipesUser.id,
+				aprovado : 0
+			})
+
+		}
 
 		return {
 			status: true,
