@@ -4,6 +4,7 @@ import { findAll, findOne } from "../controllers/users/get";
 import LoginUser from "../controllers/users/loginController";
 import UpdateUser from "../controllers/users/update";
 import DeleteUser from "../controllers/users/delete";
+import CadastrateUser from "../controllers/users/cadastroController";
 
 import Authorize from "../middlewares/authorization";
 
