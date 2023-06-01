@@ -9,7 +9,7 @@ export async function deleteUserService(id) {
 			throw new Error("User not find!");
 		}
 
-		const userDeleted = await database("usuario").delete().where({ id });
+		const userDeleted = await database("usuario").update({ativo: 0}).where({ id });
 		return {
 			status: true,
 			message: "User deleted!",
