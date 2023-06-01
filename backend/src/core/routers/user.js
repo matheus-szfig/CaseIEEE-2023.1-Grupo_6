@@ -10,12 +10,20 @@ import Authorize from "../middlewares/authorization";
 
 const router_usuario = Router();
 
+// gets
 router_usuario.get("/", findAll);
 router_usuario.get("/:id", findOne);
+
+// login e cadastro
 router_usuario.post("/login", LoginUser);
 router_usuario.post("/cadaster", CadastrateUser);
+
+// update
 router_usuario.patch("/update/:id",UpdateUser);
-router_usuario.delete("/delete/:id", Authorize(['admin'], {type:'params', key:'id'}) ,DeleteUser);
+
+// delete
+// router_usuario.delete("/delete/:id", Authorize(['admin'], {type:'params', key:'id'}) ,DeleteUser);
+router_usuario.delete("/delete/:id",DeleteUser);
 
 export default router_usuario;
 
