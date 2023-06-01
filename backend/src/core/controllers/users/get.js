@@ -1,5 +1,5 @@
 import { request, response } from "express";
-import { findAllService, findOneService } from "../service/users/get";
+import { findAllService, findOneService } from "../../service/users/get";
 
 export async function findAll(req = request, res = response) {
   res.json(findAllService);
