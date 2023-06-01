@@ -13,6 +13,7 @@ const router_usuario = Router();
 router_usuario.get("/", findAll);
 router_usuario.get("/:id", findOne);
 router_usuario.post("/login", LoginUser);
+router_usuario.post("/cadaster", CadastrateUser);
 router_usuario.patch("/update/:id",UpdateUser);
 router_usuario.delete("/delete/:id", Authorize(['admin'], {type:'params', key:'id'}) ,DeleteUser);
 
