@@ -1,13 +1,10 @@
 html, body {
   font-family: 'Poppins', sans-serif;
-  height: 100%;
   margin: 0;
   padding: 0;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
+.loginform {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,159 +12,136 @@ html, body {
   background: #E6E6E6;
 }
 
-.container .header {
-  width: 396px;
-  height: 234px;
+.loginform .header {
+  width: 28.8rem;
+  height: 10rem; /* Reduzida a altura */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 41px;
-  margin-top: 60px;
+  margin-top: 2rem; 
 }
 
-.container .header .ieee-logo {
-  width: 112px;
-  height: 107px;
-  margin-bottom: 21px;
+.loginform .header .ieee-logo {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 0.6rem;
 }
 
-.container .header h1,
-.container .header h2 {
+.loginform .header h1,
+.loginform .header h2 {
   font-weight: 800;
-  font-size: 45px;
+  font-size: 2.2rem; /* Reduzido o tamanho dos títulos */
   line-height: 1.2;
   color: #0D5FAA;
-  margin: 0;
 }
 
-.container form {
+.loginform form {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
-  width: 494px;
-  max-width: 90%;
-  height: 480px;
+  width: 90%;
+  max-width: 25rem;
+  height: 24rem;
   background: #fff;
-  border: 2px solid #0D5FAA;
-  border-radius: 4px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-bottom: 131px;
-  padding: 20px;
+  border: 0.1rem solid #0D5FAA;
+  border-radius: 0.32rem;
+  box-shadow: 0px 0.128rem 0.128rem rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-top: 1rem;
 }
 
-.container form h1 {
+.loginform form h1 {
   font-weight: 700;
-  font-size: 45px;
+  font-size: 2rem; 
   line-height: 1.2;
   color: #0D5FAA;
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 0.5rem; 
 }
 
-.container form .titleLine {
-  margin-bottom: 30px;
+.loginform form .titleLine {
+  margin-bottom: 1.4rem;
   left: 0;
-  width: 293px;
-  height: 1px;
+  width: 15rem;
+  height: 0.0625rem;
   background-color: #000;
   border: none;
 }
 
-.container form .inputContainer {
-  display: flex;
+.loginform form .inputLoginform {
   align-items: flex-start;
   flex-direction: column;
-  margin-bottom: 8px;
+  margin-bottom: 0.4rem;
+  max-width: 20.64rem;
 }
 
-.container form .inputContainer label {
+.loginform form .inputLoginform label {
   font-weight: 700;
-  font-size: 25px;
-  margin-bottom: 8px;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
   color: #0D5FAA;
 }
 
-.container form .inputContainer input {
-  padding: 12px;
-  width: 400px;
-  max-width: 100%;
-  height: 46px;
-  border-radius: 4px;
-  margin-bottom: 8px;
+.loginform form .inputLoginform input {
+  padding: 0.96rem;
+  width: 100%;
+  max-width: 22.4rem;
+  height: 2.3rem;
+  border-radius: 0.32rem;
+  margin-bottom: 0.4rem;
   background: #E6E6E6;
   outline: none;
   border: none;
 }
 
-.container form .inputContainer .passwordInputContainer {
-  position: relative;
-}
-
-.container form .inputContainer .passwordInputContainer input {
-  padding-right: 40px;
-}
-
-.container form .inputContainer .passwordInputContainer .passwordToggle {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.container form .inputContainer .passwordInputContainer .passwordToggle svg {
-  width: 16px;
-  height: 16px;
-  color: #aaa;
-}
-
-.container form .button {
-  width: 168px;
-  height: 40px;
+.loginform form .button {
+  width: 9.12rem;
+  height: 2.1rem;
   background: #0D5FAA;
-  border-radius: 4px;
+  border-radius: 0.32rem;
   color: #fff;
   border: none;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  margin-top: 0.4rem;
 }
 
-.container form .button:hover {
+.loginform form .button:hover {
   cursor: pointer;
   opacity: 0.8;
 }
 
-.container form .footer {
+.loginform form .footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 34px;
+  margin-top: 1rem;
 }
 
-.container form .footer p {
+.loginform form .footer p {
   font-weight: 700;
-  font-size: 16px;
-  line-height: 12px;
+  font-size: 1rem;
+  line-height: 0.75rem;
   color: rgba(60, 136, 185, 0.91);
+  margin-right: 0.5rem;
 }
 
-.container form .footer .signupButton {
-  width: 129px;
-  height: 28px;
+.loginform form .footer .signupButton {
+  width: 8rem;
+  height: 1.75rem;
   background: #CBC8C8;
-  border-radius: 4px;
+  border-radius: 0.32rem;
   color: #0D5FAA;
   border: none;
   font-weight: 600;
-  font-size: 15px;
-  line-height: 12px;
+  font-size: 0.9375rem;
+  line-height: 0.75rem;
 }
 
-.container form .footer .signupButton:hover {
+.loginform form .footer .signupButton:hover {
   cursor: pointer;
   opacity: 0.8;
 }

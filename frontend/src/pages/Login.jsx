@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "../styles/stylesLogin.css";
-import "../styles/styles.css";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,7 +9,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="loginform">
       <header className="header">
         <img
           className="ieee-logo"
@@ -26,7 +23,7 @@ const Login = () => {
       <form>
         <h1>Login</h1>
         <hr className="titleLine" />
-        <div className="inputContainer">
+        <div className="inputLoginform">
           <label htmlFor="email">Email</label>
           <input
             type="text"
@@ -36,9 +33,9 @@ const Login = () => {
           />
         </div>
 
-        <div className="inputContainer">
+        <div className="inputLoginform">
           <label htmlFor="password">Senha</label>
-          <div className="passwordInputContainer">
+          <div className="passwordInput">
             <input
               type={showPassword ? "text" : "password"}
               name="password"
