@@ -5,13 +5,13 @@ export default function Authorize(permissionlist, {type, key}) {
   return (req = request, res = response, next) => {
 
     try{
-      const userInfo = req.token?.UserInfo;
+      const userInfo = req.cookies['access_token'];
 
       if (!userInfo) {
         throw { status:401, message:"Token is missing" };
       }
       
-      const allow = userInfo.permission.reduce((acc, v) => {
+      const allow = userInfo.permissions.reduce((acc, v) => {
         return acc || permissionlist.includes(v);
       }, false);
  
