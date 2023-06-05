@@ -43,6 +43,18 @@ export const authSelector = selector({
   }
 })
 
+export const authInfo = selector({
+  key:'authInfo',
+  get({get}) {
+    const auth = get(authAtom);
+    return {
+      id:auth.id,
+      nome:auth.nome,
+      email:auth.email
+    };
+  }
+})
+
 export function AuthContext ({children}) {
 
   const [_a, setAuth] = useRecoilState(authAtom);
@@ -51,9 +63,9 @@ export function AuthContext ({children}) {
   async function AuthUser () {
     try{
       const api = useApi();
+
       // const {data} = await api.get('/user/auth');
       // const authData = data.data;
-
       // setAuth(authData);
     }catch(e){
       setAuth(false);

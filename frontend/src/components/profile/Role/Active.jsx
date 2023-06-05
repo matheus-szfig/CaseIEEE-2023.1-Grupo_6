@@ -1,4 +1,4 @@
-export default function ActiveRole ({cargo, equipe, id, img, active}) {
+export default function ActiveRole ({id, cargo, equipe, img}) {
 
   function RemoveCargo (e) {
     e.preventDefault();

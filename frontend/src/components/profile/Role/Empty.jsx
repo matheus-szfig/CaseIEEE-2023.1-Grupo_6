@@ -1,17 +1,17 @@
-export default function EmptyRole ({cargo, equipe, id, img, active}) {
+export default function EmptyRole () {
 
   function AddRole (e) {
     e.preventDefault();
   }
 
   return (
-    <div className={`p-2 bg-gray-500 rounded mt-1`}>
-      <div className={`flex justify-between px-2 opacity-0`}>
+    <div className={`p-2 bg-gray-300 border border-gray-400 rounded mt-1`}>
+      <div className={`flex justify-between px-2`}>
         <div className='flex items-center'>
-          <img className='border rounded-full h-12 me-3' />
+          <button onClick={AddRole}>
+            <img className='border rounded-full border-gray-400 h-12 w-12 bg-white me-3' src={'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png'}/>
+          </button>
           <div className='flex flex-col justify-center'>
-            <h5 className='text-white font-medium text-lg'></h5>
-            <h6 className='text-white text-md font-light'></h6>
           </div>
         </div>
       </div>

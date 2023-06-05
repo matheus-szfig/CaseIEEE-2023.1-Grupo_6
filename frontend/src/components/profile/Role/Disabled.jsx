@@ -1,4 +1,4 @@
-export default function DisabledRole ({cargo, equipe, id, img, active}) {
+export default function DisabledRole ({id, cargo, equipe, img}) {
 
   function RemoveCargo (e) {
     e.preventDefault();
@@ -9,7 +9,7 @@ export default function DisabledRole ({cargo, equipe, id, img, active}) {
   }
 
   return (
-    <div className={`p-2 ${!!active ? "bg-primary" : "bg-gray-500"} rounded mt-1`}>
+    <div className={`p-2 bg-gray-500 rounded mt-1`}>
       <div className={`flex justify-between px-2 ${!cargo ? 'opacity-0' : ''}`}>
         <div className='flex items-center'>
           <img className='border rounded-full h-12 me-3' src={img} />
