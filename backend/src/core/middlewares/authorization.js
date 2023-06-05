@@ -1,17 +1,11 @@
 import { request, response } from "express";
 
-export default function Authorize(permissionlist, {type, key}) {
+export default function Authorize(permissionlist, {type, key}="") {
 
   return (req = request, res = response, next) => {
 
     try{
-      const userInfo = req.token?.UserInfo;
-
-      if (!userInfo) {
-        throw { status:401, message:"Token is missing" };
-      }
-      
-      const allow = userInfo.permission.reduce((acc, v) => {
+      const allow = userInfo.permissions.reduce((acc, v) => {
         return acc || permissionlist.includes(v);
       }, false);
  
@@ -24,7 +18,7 @@ export default function Authorize(permissionlist, {type, key}) {
       next();
 
     }catch(e){
-      return res.status(e.status).send(e.message)
+      return res.status(e.status).send({status:false, message:e.message})
     }
 
   }

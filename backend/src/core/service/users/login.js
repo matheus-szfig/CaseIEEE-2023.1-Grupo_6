@@ -32,8 +32,7 @@ export async function loginUserService(email, senha, res) {
     const token = jwt.sign(tokenPayload, process.env.JWT_KEY || "", { expiresIn: "48h" });
 
     // Configuração cookie
-    const cookieToken = CookieDealer.createToken(token);
-    res.cookie("access_token", cookieToken, {
+    res.cookie("access_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
