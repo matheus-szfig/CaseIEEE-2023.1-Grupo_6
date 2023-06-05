@@ -11,11 +11,11 @@ import { AuthContext } from "./components/Auth";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <AuthContext>
-        <Router />
-      </AuthContext>
-    </RecoilRoot>
+      <RecoilRoot>
+        <AuthContext>
+          <Router />
+        </AuthContext>
+      </RecoilRoot>
   </React.StrictMode>
 );
 

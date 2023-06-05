@@ -11,7 +11,7 @@ export default async function AuthToken (payload) {
       nome:"nome"
     }).where({
       id:userInfo.id
-    });
+    }).first();
 
     const permissions = await database('v_p_usuario').select({
       id:"id_permissao",
@@ -22,10 +22,9 @@ export default async function AuthToken (payload) {
 
     const token = {
       ...user,
-      permissions
+      permissions:permissions.map(p => p['permission'])
     }
 
-    console.log(token);
     return {token}
 
   }catch(e){

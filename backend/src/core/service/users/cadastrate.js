@@ -5,35 +5,21 @@ function verificaOpcao(valor, opcoes) {
 	return opcoes.some(opcao => opcao.nome === valor);
 }
 
-export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, equipes, cargos) {
+export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, cargos) {
 	try {
 		const equipeOpcoes = await database('equipe').select('nome');
 		const cargoOpcoes = await database('cargo').select('nome');
 
-		if(JSON.stringify(equipes) === JSON.stringify(["", "", ""]) || equipes.length > 3 
-		|| JSON.stringify(cargos) === JSON.stringify(["", "", ""]) || cargos.length > 3){
+		if(cargos.length < 1 || cargos.length > 3){
 			throw new Error("Informe de cargos ou equipes irregular.");
 		}
 
-        for(let i=0;i<3;i++){
-			if (cargos[i] === "") {
-				break;
-			}
-			const verificador = verificaOpcao(cargos[i].toLowerCase(), cargoOpcoes)
+		cargos.forEach(c => {
+			const verificador = verificaOpcao(c['cargo'].toLowerCase(), cargoOpcoes) && verificaOpcao(c['equipe'].toLowerCase(), equipeOpcoes);
 			if(!verificador){
 				throw new Error("Cargo inválido");
 			}
-		}
-
-		for(let i=0;i<3;i++){
-			if (cargos[i] === "") {
-				break;
-			}
-			const verificador = verificaOpcao(equipes[i].toLowerCase(), equipeOpcoes)
-			if(!verificador){
-				throw new Error("Equipe inválido");
-			}
-		}
+		});
 
 		if(senha.length<4){
             throw new Error("Too short password");

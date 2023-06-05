@@ -44,7 +44,7 @@ const Navbar = () => {
 							return <NavButton key={b.title} title={b.title} icon={b.icon} href={b.href}/>;
 						}else{
 							return (
-								<AuthComponent permissions={['admin']}>
+								<AuthComponent key={b.title} permissions={['admin']}>
 									<NavButton key={b.title} title={b.title} icon={b.icon} href={b.href}/>
 								</AuthComponent>
 							);
