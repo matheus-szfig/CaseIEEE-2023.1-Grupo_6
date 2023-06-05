@@ -1,0 +1,173 @@
+html, body {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #E6E6E6;
+}
+
+.container .header {
+  width: 396px;
+  height: 234px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 41px;
+  margin-top: 60px;
+}
+
+.container .header .ieee-logo {
+  width: 112px;
+  height: 107px;
+  margin-bottom: 21px;
+}
+
+.container .header h1,
+.container .header h2 {
+  font-weight: 800;
+  font-size: 45px;
+  line-height: 1.2;
+  color: #0D5FAA;
+  margin: 0;
+}
+
+.container form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 494px;
+  max-width: 90%;
+  height: 480px;
+  background: #fff;
+  border: 2px solid #0D5FAA;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 131px;
+  padding: 20px;
+}
+
+.container form h1 {
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 1.2;
+  color: #0D5FAA;
+  margin-bottom: 10px;
+}
+
+.container form .titleLine {
+  margin-bottom: 30px;
+  left: 0;
+  width: 293px;
+  height: 1px;
+  background-color: #000;
+  border: none;
+}
+
+.container form .inputContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.container form .inputContainer label {
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 8px;
+  color: #0D5FAA;
+}
+
+.container form .inputContainer input {
+  padding: 12px;
+  width: 400px;
+  max-width: 100%;
+  height: 46px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background: #E6E6E6;
+  outline: none;
+  border: none;
+}
+
+.container form .inputContainer .passwordInputContainer {
+  position: relative;
+}
+
+.container form .inputContainer .passwordInputContainer input {
+  padding-right: 40px;
+}
+
+.container form .inputContainer .passwordInputContainer .passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.container form .inputContainer .passwordInputContainer .passwordToggle svg {
+  width: 16px;
+  height: 16px;
+  color: #aaa;
+}
+
+.container form .button {
+  width: 168px;
+  height: 40px;
+  background: #0D5FAA;
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 8px;
+}
+
+.container form .button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.container form .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.container form .footer p {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 12px;
+  color: rgba(60, 136, 185, 0.91);
+}
+
+.container form .footer .signupButton {
+  width: 129px;
+  height: 28px;
+  background: #CBC8C8;
+  border-radius: 4px;
+  color: #0D5FAA;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 12px;
+}
+
+.container form .footer .signupButton:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
