@@ -23,47 +23,50 @@ const Login = () => {
       <form>
         <h1>Login</h1>
         <hr className="titleLine" />
-        <div className="inputLoginform">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder="example.email@gmail.com"
-          />
-        </div>
 
-        <div className="inputLoginform">
-          <label htmlFor="password">Senha</label>
-          <div className="passwordInput">
+        <div className="inputContainer">
+          <div className="inputLoginform">
+            <label htmlFor="email">Email</label>
             <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              id="password"
-              placeholder= {showPassword ? "password" : "*******"}
+              type="text"
+              name="email"
+              id="email"
+              placeholder="example.email@gmail.com"
             />
-            <span
-              className="passwordToggle"
-              onClick={handlePasswordToggle}
-            >
-              
-              {showPassword ? (
+          </div>
 
-                  <img
-                  className="h-6"
-                  src={process.env.PUBLIC_URL + "/Visibility.svg"}
-                  alt="Show Password"
-                  />
-                ): 
-              (<img
-              className="h-6"
-              src={process.env.PUBLIC_URL + "/VisibilityOff.svg"}
-              alt="Hide Password"
-              />)
-              
-            
-            }
-            </span>
+          <div className="inputLoginform">
+            <label htmlFor="password">Senha</label>
+            <div className="passwordInput">
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  placeholder={showPassword ? "password" : "*******"}
+                  className="py-2 pl-4 pr-10 rounded"
+                />
+
+                <span
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+                  onClick={handlePasswordToggle} // Adicione esta linha
+                >
+                  {showPassword ? (
+                    <img
+                      className="h-6"
+                      src={process.env.PUBLIC_URL + "/Visibility.svg"}
+                      alt="Show Password"
+                    />
+                  ) : (
+                    <img
+                      className="h-6"
+                      src={process.env.PUBLIC_URL + "/VisibilityOff.svg"}
+                      alt="Hide Password"
+                    />
+                  )}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
