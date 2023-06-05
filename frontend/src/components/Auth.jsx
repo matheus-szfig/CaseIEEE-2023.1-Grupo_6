@@ -4,7 +4,14 @@ import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
 const authAtom = atom({
   key:'auth',
-  default:false
+  default:{
+    "id": 28,
+    "email": "teste_matheus@example.com",
+    "nome": "Matheus",
+    "permissions": [
+      "admin"
+    ]
+  }
 });
 
 const readyAtom = atom({
@@ -32,7 +39,7 @@ export const authSelector = selector({
   key:'isAuth',
   get({get}) {
     const isAuth = get(authAtom);
-    return isAuth;
+    return !!isAuth;
   }
 })
 
@@ -44,20 +51,19 @@ export function AuthContext ({children}) {
   async function AuthUser () {
     try{
       const api = useApi();
-      const {data} = await api.get('/user/auth');
-      const authBool = data.data;
+      // const {data} = await api.get('/user/auth');
+      // const authData = data.data;
 
-      setAuth(authBool);
+      // setAuth(authData);
     }catch(e){
       setAuth(false);
-    }finally{
-      setReady(true);
     }
+    setReady(true);
   }
 
   useEffect(() => {
     AuthUser ();
-  });
+  }, []);
 
   return (
     <>
@@ -67,49 +73,35 @@ export function AuthContext ({children}) {
 
 }
 
-export function AuthPage ({permissions, redirect}) {
+export function AuthComponent ({permissions, redirect, children}) {
+
+  const [hasPerm, setHasPerm] = useState(false);
+
   const isAuth = useRecoilValue(authSelector);
   const isReady = useRecoilValue(authReady);
   const authPerm = useRecoilValue(authPermissions);
 
   function HasPermissions () {
+    
+    const hPerm = !!permissions ? authPerm?.reduce((acc, v) => {
+      return acc || permissions?.includes(v);
+    }, false) : true;
 
-    if(!permissions || permissions.length === 0) return false;
+    setHasPerm(hPerm);
 
-    return authPerm.reduce((acc, v) => {
-      return acc || permissions.includes(v);
-    }, false);
+    if(!!isReady && (!isAuth || !hPerm)){
+      if(redirect) window.location.href = redirect;
+    }
   }
 
   useEffect(() => {
-    if(!!isReady && !isAuth || HasPermissions()){
-      window.location.href = redirect;
-    }
-  }, [isReady])
-  
-  return (
-    <>
-    </>
-  )
-}
-
-export function AuthComponent ({permissions, children}) {
-  const isAuth = useRecoilValue(authSelector);
-  const isReady = useRecoilValue(authReady);
-  const authPerm = useRecoilValue(authPermissions);
-
-  function HasPermissions () {
-
-    if(!permissions || permissions.length === 0) return false;
-
-    return authPerm.reduce((acc, v) => {
-      return acc || permissions.includes(v);
-    }, false);
-  }
+    console.log(authPerm, isReady, isAuth);
+    HasPermissions ();
+  }, [isReady]);
 
 	return (
 		<>
-			{(!!isAuth && !!isReady && HasPermissions()) ? (children || null) : null}
+			{(!!isAuth && !!isReady && hasPerm) ? (children || null) : null}
 		</>
 	);
 };

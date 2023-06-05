@@ -6,9 +6,7 @@ export default async function Authenticate(req = request, res = response, next) 
   try{
     let cookie = req.cookies['access_token'] || '';
 
-    console.log(cookie);
-    cookie = verify(cookie, process.env.JWT_KEY || "");
-    console.log('\n',cookie);
+    cookie = verify(cookie, process.env.JWT_KEY);
 
     const {token, error} = await AuthToken(cookie)
 
@@ -20,7 +18,7 @@ export default async function Authenticate(req = request, res = response, next) 
 
     next();
   }catch(e){
-    res.status(401).send({status:false, message:'Invalid or missing token'});
+    res.status(401).send({status:false, message:'Invalid or missing access token'});
   }
 
 }
