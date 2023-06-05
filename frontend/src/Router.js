@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Equipes from "./pages/Equipes";
 import Admin from "./pages/Admin";
+import Cadastro from "./pages/Cadastro";
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
   {
     path: '/admin',
     element: <Admin/>
+  },
+  {
+    path: '/cadastro',
+    element: <Cadastro/>
   },
   // Adicione outras rotas conforme necessário
   // {
