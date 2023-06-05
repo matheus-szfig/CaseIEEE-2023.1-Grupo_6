@@ -4,12 +4,18 @@ import reportWebVitals from "./reportWebVitals";
 import Router from "./Router";
 import 'tailwindcss/tailwind.css';
 import './styles/styles.css';
+import { RecoilRoot } from "recoil";
+import { AuthContext } from "./components/Auth";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router />
+      <RecoilRoot>
+        <AuthContext>
+          <Router />
+        </AuthContext>
+      </RecoilRoot>
   </React.StrictMode>
 );
 
