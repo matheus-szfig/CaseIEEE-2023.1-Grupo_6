@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavButton from "./NavButton";
+import {AuthComponent} from './Auth';
 
 const Navbar = () => {
 	
@@ -38,21 +40,15 @@ const Navbar = () => {
 				<h1 className="text-white text-xl font-bold">Ramo Estudantil IEEE</h1>
 				<ul className="flex ml-14">
 					{navButtons.map((b) => {
-						return (
-							<div className="flex items-center">
-								<li className="ml-1.5">
-									<Link
-										className={`flex items-center h-16 px-2
-										text-white hover:underline
-										hover:bg-black/20 `}
-										to={b.href}
-									>
-										<img className="pb-0.5 mr-2" src={b.icon} alt={b.title} />
-										<span className="  hidden sm:inline">{b.title}</span>
-									</Link>
-								</li>
-							</div>
-						);
+						if(!b.admin){
+							return <NavButton key={b.title} title={b.title} icon={b.icon} href={b.href}/>;
+						}else{
+							return (
+								<AuthComponent permissions={['admin']}>
+									<NavButton key={b.title} title={b.title} icon={b.icon} href={b.href}/>
+								</AuthComponent>
+							);
+						}
 					})}
 				</ul>
 
