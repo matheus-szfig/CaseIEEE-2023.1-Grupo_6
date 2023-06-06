@@ -37,7 +37,8 @@ const Navbar = () => {
       `}
 			>
 				<img className="h-12 mx-2" src={process.env.PUBLIC_URL+"/RamoLogo.svg"} alt="Logo IEEE" />
-				<h1 className="text-white text-xl font-bold">Ramo Estudantil IEEE</h1>
+				<h1 className="text-white text-xl font-bold md:hidden ms-1">IEEE</h1>
+				<h1 className="text-white text-xl font-bold hidden md:block ms-1">Ramo Estudantil IEEE</h1>
 				<ul className="flex ml-14">
 					{navButtons.map((b) => {
 						if(!b.admin){

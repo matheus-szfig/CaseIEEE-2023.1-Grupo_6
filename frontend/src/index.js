@@ -6,15 +6,17 @@ import 'tailwindcss/tailwind.css';
 import './styles/styles.css';
 import { RecoilRoot } from "recoil";
 import { AuthContext } from "./components/Auth";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+      <ToastContainer position="top-center" autoClose={1500} />
       <RecoilRoot>
-        <AuthContext>
-          <Router />
-        </AuthContext>
+          <AuthContext>
+              <Router />
+          </AuthContext>
       </RecoilRoot>
   </React.StrictMode>
 );

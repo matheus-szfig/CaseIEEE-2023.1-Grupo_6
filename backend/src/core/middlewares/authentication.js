@@ -5,7 +5,6 @@ import { decode, verify } from "jsonwebtoken";
 export default async function Authenticate(req = request, res = response, next) {
   try{
     let cookie = req.cookies['access_token'] || '';
-
     cookie = verify(cookie, process.env.JWT_KEY);
 
     const {token, error} = await AuthToken(cookie)
