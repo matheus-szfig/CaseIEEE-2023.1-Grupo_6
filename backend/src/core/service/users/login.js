@@ -1,27 +1,28 @@
 import { database } from "../../../config/database";
 import { ComparePassword } from "../../../utils/secure";
-import { CookieDealer } from "../../../utils/cookie";
 import jwt from "jsonwebtoken";
 
-export async function loginUserService(email, senha, res) {
+export async function loginUserService(email, password, res) {
   try {
     const user = await database("usuario").select("*").where({ email }).first();
 
-    //const permission = await database("v_p_usuario").select({"permissao":"descricao"}).where({ "id_usuario": user.id });
-
-    //const cargo = await database("v_c_usuario").select({ equipe , cargo , aprovado }).where({ "id_usuario": user.id });
-
+    // Verifica se o usuário existe
     if (!user) {
       throw new Error("User not found");
     }
 
-    const verifyPassword = await ComparePassword(senha, user.senha);
+    // Verifica se a senha está definida e não é vazia
+    if (!user.password) {
+      throw new Error("Password undefined");
+    }
+
+    const verifyPassword = await ComparePassword(password, user.password);
 
     if (!verifyPassword) {
       throw new Error("Invalid password");
     }
 
-     const tokenPayload = {
+    const tokenPayload = {
       UserInfo: {
         id: user.id,
         nome: user.name,
