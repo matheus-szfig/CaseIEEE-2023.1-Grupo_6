@@ -8,11 +8,13 @@ import { ActiveRole, DisabledRole, EmptyRole} from '../components/profile/Role/I
 import PictureTab from '../components/profile/PictureTab'
 import { useRecoilValue } from 'recoil';
 import '../styles/Profile.css';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
 
   const [cargos, setCargos] = useState([]);
   const authInfo = useRecoilValue(authInfoSelector);
+  const [changePass, setChangePass] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     nome: "Matheus de Souza Figueiredo",
@@ -20,10 +22,19 @@ const Profile = () => {
     notify:1
   });
 
+  const [newPassoword, setNewPassoword] = useState({
+    old:"",
+    current: "",
+    new: "",
+    confirm:""
+  });
+
+
   function ToggleEditPass (e) {
     e.preventDefault();
     document.getElementById('changePassForm').classList.toggle("active");
     document.getElementById('spacer').classList.toggle("active");
+    setChangePass(!changePass);
   }
 
   function LoadResources () {
@@ -32,6 +43,11 @@ const Profile = () => {
       {equipe:"WolfRocket", cargo:"Assessor", active:1, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"},
       {equipe:"WolfBotz", cargo:"Membro Técnico", active:0, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"}
     ]);
+  }
+
+  function SaveData (e) {
+    e.preventDefault();
+    toast.success("Salvo!")
   }
 
   useEffect(() => {
@@ -47,32 +63,32 @@ const Profile = () => {
 
             <PictureTab nome={userInfo.nome} img={"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"}/>
 
-            <div className='rounded border border-light-gray pt-7 px-10 shadow-md w-4/4 mt-5 md:mt-0 md:w-3/4 md:ms-10 mb-10'>
+            <div className='rounded border border-light-gray pt-7 px-10 shadow-md w-4/4 mt-5 md:mt-0 md:w-3/4 md:ms-10 mb-7'>
               <form>
 
                 <h1 className='text-3xl text-primary font-bold'>Conta</h1>
                 <div className='flex justify-between mt-5'>
                   <div className='flex flex-inline flex-col w-[100%] pe-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Email</label>
-                    <input id="email" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='email' type='text' disabled value={userInfo.email}/>
+                    <input id="email" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='email' name='email' type='text' disabled value={userInfo.email}/>
                   </div>
                   <div className='flex flex-inline flex-col w-[100%] ps-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="senha">Senha Atual</label>
                     <div className='flex flex-inline w-[100%]'>
-                      <input id="senha" className='rounded-s border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='senha' type='password' value={'0'.repeat(10)} disabled/>
-                      <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}>E</button>
+                      <input id="senha" className='rounded-s border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='current-password' name='current-password' type='password' value={'0'.repeat(10)} disabled={!changePass}/>
+                      <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}>{!changePass ? "E" : "X"}</button>
                     </div>
                   </div>
                 </div>
 
-                <div id="changePassForm" className='flex justify-between mt-5 active'>
+                <div id="changePassForm" className='flex justify-between mt-5'>
                   <div className='flex flex-inline flex-col w-[100%] pe-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Nova Senha</label>
-                    <input id="email" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='email' type='password'/>
+                    <input id="new-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='new-password' name='new-password' type='password'/>
                   </div>
                   <div className='flex flex-inline flex-col w-[100%] ps-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Confirmar Senha</label>
-                    <input id="email" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='email' type='password'/>
+                    <input id="confirm-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='confirm-password' type='password'/>
                   </div>
                 </div>
 
@@ -101,7 +117,7 @@ const Profile = () => {
                         <input id="default-checkbox" type="checkbox" checked={userInfo.notify} class="w-5 h-5 bg-gray-100 border-gray-300 rounded-full focus:ring-primary focus:color-primary focus:ring-2" />
                         <label for="default-checkbox" class="ml-2 text-md font-medium text-primary/70">Receber atualizações por e-mail</label>
                     </div>
-                    <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded' onClick={(e) => e.preventDefault()}>Salvar</button>
+                    <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded' onClick={SaveData}>Salvar</button>
                 </div>
               </form>
             </div>

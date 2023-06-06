@@ -107,7 +107,6 @@ export function AuthComponent ({permissions, redirect, children}) {
   }
 
   useEffect(() => {
-    console.log(authPerm, isReady, isAuth);
     HasPermissions ();
   }, [isReady]);
 
