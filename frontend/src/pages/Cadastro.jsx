@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Cadastro = () => {
@@ -33,9 +35,10 @@ const Cadastro = () => {
     try{
       const response = await axios.post("http://localhost:5000/user/cadaster", usuario);
       console.log(response.data);
+      toast.success('Usuário cadastrado com êxito');
     } catch (error) {
-      console.error(error);
-      alert(error);
+      console.log(error);
+      toast.error('Falha no envio do formulário');
     }
     //navigate('/login')
   }

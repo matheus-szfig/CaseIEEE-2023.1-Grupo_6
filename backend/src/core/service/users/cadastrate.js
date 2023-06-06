@@ -72,7 +72,6 @@ export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, 
 				aprovado : 0
 			})	
 		}
-
 		return {
 			status: true,
 			message: "Usuário cadastrado com êxito",
