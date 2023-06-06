@@ -1,0 +1,23 @@
+#changePassForm{
+  height: 0px;
+  overflow-y: hidden;
+  transition: height 0.5s;
+  transition-delay: 0.2s;
+}
+
+#changePassForm.active{
+  height: 65px;
+  transition: height 0.5s;
+}
+
+#spacer{
+  height: 0rem;
+  overflow-y: hidden;
+  transition: height 0.5s;
+}
+
+#spacer.active{
+  height: 1rem;
+  transition: height 0.5s;
+  transition-delay: 0.25s;
+}
