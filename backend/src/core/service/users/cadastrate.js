@@ -22,7 +22,6 @@ export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, 
 
 		cargos.forEach(c => {
 			const verificador = verificaOpcao(c['cargo'], cargoOpcoes) && verificaOpcao(c['equipe'], equipeOpcoes);
-			console.log(c['cargo']);
 
 			if(!verificador){
 				throw new Error("Cargo inválido");
@@ -59,7 +58,7 @@ export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, 
         })
 
 		const idUser = await database('usuario').select('id').where({"email": email }).first();
-		for(let i=0;i<3;i++){
+		for(let i=0;i<cargos.length;i++){
 			if (cargos[i]==="" || cargos[i]===undefined || cargos[i]===null) {
 				break;
 			}
