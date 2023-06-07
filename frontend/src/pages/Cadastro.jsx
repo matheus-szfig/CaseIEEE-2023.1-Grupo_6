@@ -24,36 +24,61 @@ const Cadastro = () => {
   const [cargo3, setCargo3] = useState("");
   const [permissao, setPermissao] = useState("");
 
+  async function handleSubmit(event){
+    event.preventDefault();
+    const verificacaoElementos = verificaConteudoSelect();
+    if(verificacaoElementos){
+      const usuario = {nome,email,senha,senhaConfirmacao,equipe1,cargo1,equipe2,cargo2,equipe3,cargo3,permissao};
+      try{
+        const response = await axios.post("http://localhost:5000/user/cadaster", usuario);
+        console.log(response.data);
+        if(response.data.status===false){
+          toast.error('Falha no envio do formulário');
+        }
+        if(response.data.message==="Preencha os campos obrigatórios."){
+          toast.error('Preencha os campos obrigatórios!');
+        }
+        else if(response.data.message==="Informe de cargos ou equipes irregular."){
+          toast.error('Informe de cargos ou equipes irregular!');
+        }
+        else if(response.data.message==="Cargo inválido!"){
+          toast.error('Cargo inválido!');
+        }
+        else if(response.data.message==="Senha muito curta!"){
+          toast.error('Senha muito curta!');
+        }
+        else if(response.data.message==="As senhas precisam ser iguais"){
+          toast.error('As senhas precisam ser iguais!');
+        }
+        else if(response.data.message==="Endereço de e-mail já cadastrado!"){
+          toast.error('Endereço de e-mail já cadastrado!');
+        }
+        else if(response.data.message==="Erro no informe de permissões"){
+          toast.error('Erro no informe de permissões!');
+        }
+        else if(response.data.status===true){
+          toast.success('Usuário cadastrado com êxito!');
+          navigate('/login');
+        }  
+      } catch (error) {
+        console.log(error);
+        toast.error('Falha no envio do formulário');
+      }
+    }
+  }
+
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
   };
 
-  function verificaElementos(){
-    let nome = document.getElementById('nomeInput');
-    let email = document.getElementById('emailInput');
-    let senha = document.getElementById('senhaInput');
-    let senhaConf = document.getElementById('senhaConfInput');
-    let equipe1 = document.getElementById('e1Select');
+  function verificaConteudoSelect(){
     let equipe2 = document.getElementById('e2Select');
     let equipe3 = document.getElementById('e3Select');
-    let cargo1 = document.getElementById('c1Select');
     let cargo2 = document.getElementById('c2Select');
     let cargo3 = document.getElementById('c3Select');
-
-    if(nome.value==="" || email.value==="" || senha.value==="" || senhaConf.value==="" || equipe1.value==="" || cargo1.value===""){
-      toast.error('Preencha os campos obrigatórios!');
-      return false;
-    }
-     else if(senha.value.length < 4 || senhaConf.value.length < 4){
-      toast.error('Senha muito curta!');
-      return false;
-    }
-    else if(senha.value !== senhaConf.value){
-      toast.error('As senhas precisam ser iguais!');
-      return false;
-    }
-    else if((equipe2.value!=="" && cargo2.value==="") || (cargo2.value!=="" && equipe2.value==="")){
+    
+    if((equipe2.value!=="" && cargo2.value==="") || (cargo2.value!=="" && equipe2.value==="")){
       toast.error('Equipe 2 ou Cargo 2 irregular');
       return false;
     }
@@ -63,24 +88,6 @@ const Cadastro = () => {
     }
     else{
       return true;
-    }
-  }
-
-  async function handleSubmit(event){
-    event.preventDefault();
-    const verificacaoElementos = verificaElementos();
-    if(verificacaoElementos){
-      console.log("Info: ",nome, email, senha, senhaConfirmacao, equipe1,equipe2,equipe3,cargo1,cargo2,cargo3,permissao);
-      const usuario = {nome,email,senha,senhaConfirmacao,equipe1,cargo1,equipe2,cargo2,equipe3,cargo3,permissao};
-      try{
-        const response = await axios.post("http://localhost:5000/user/cadaster", usuario);
-        console.log(response.data);
-        toast.success('Usuário cadastrado com êxito');
-        navigate('/login');
-      } catch (error) {
-        console.log(error);
-        toast.error('Falha no envio do formulário');
-      }
     }
   }
 

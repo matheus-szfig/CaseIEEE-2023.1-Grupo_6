@@ -8,6 +8,8 @@ function verificaOpcao(valor, opcoes) {
 export async function cadastrateUserService(email, senha,nome,senhaConfirmacao, cargos,permissao) {
 	try {
 		if(nome==="" || nome===null || nome==undefined ||
+			email==="" || email===null || email==undefined ||
+			cargos.length<1||
 			senha==="" || senha===null || senha==undefined ||
 			senhaConfirmacao==="" || senhaConfirmacao===null || senhaConfirmacao==undefined)
 			{
