@@ -3,7 +3,6 @@ import "../styles/stylesLogin.css";
 import {toast} from "react-toastify";
 import {useNavigate, Link} from "react-router-dom";
 import useApi from "../hooks/useApi";
-import axios from 'axios';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,11 +26,9 @@ const Login = () => {
   async function handleEnvio (event) {
     event.preventDefault();
     const usuario = {email, senha:password}
-    console.log(email, password);
-    console.log(usuario);
+    
     try{
       const response = await api.post("http://localhost:5000/user/login", usuario);
-      console.log(response.data);
 
       if(response.data.status === true){
       
