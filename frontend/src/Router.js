@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Equipes from "./pages/Equipes";
 import Admin from "./pages/Admin";
 import Cadastro from "./pages/Cadastro";
+import Login from "./pages/Login";
 
 const routes = [
   {
@@ -27,11 +28,10 @@ const routes = [
     path: '/cadastro',
     element: <Cadastro/>
   },
-  // Adicione outras rotas conforme necessário
-  // {
-  //   path: '/exemplo',
-  //   element: <Exemplo />
-  // },
+  {
+     path: '/login',
+     element: <Login/>
+  },
 ];
 
 function Router(props) {

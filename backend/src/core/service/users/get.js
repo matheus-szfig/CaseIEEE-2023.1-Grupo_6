@@ -2,10 +2,13 @@ import { database } from "../../../config/database";
 
 export async function findAllService() {
     try {
-        const users = await database("usuario").select("usuario.id", "usuario.nome", "usuario.email", "equipe.nome as equipe", "cargo.nome as cargo")
-        .leftJoin("usuario_equipe", "usuario_equipe.id_usuario", "usuario.id")
-        .leftJoin("equipe", "equipe.id", "usuario_equipe.id_equipe")
-        .leftJoin("cargo", "cargo.id", "usuario_equipe.id_cargo")
+        let users = await database("usuario").select("id", "nome", "email")
+        users = users.map(async u=>{
+            const cargos = await database("v_c_usuario").select("id_usuario", "id_cargo", "id_equipe", "equipe", "cargo", "aprovado").where("id_usuario", u.id)
+            return{...u,
+                cargos}
+        })
+        users = Promise.all(users)
         return users;
     } catch (error) {
         console.log(error);
@@ -17,16 +20,14 @@ export async function findAllService() {
 
 export async function findOneService(id) {
     try {
-        const user = await database("usuario").select("usuario.id", "usuario.nome", "usuario.email", "equipe.nome as equipe", "cargo.nome as cargo")
-        .leftJoin("usuario_equipe", "usuario_equipe.id_usuario", "usuario.id")
-        .leftJoin("equipe", "equipe.id", "usuario_equipe.id_equipe")
-        .leftJoin("cargo", "cargo.id", "usuario_equipe.id_cargo")
-        .where("usuario.id", id).first()
-        if(!user) {
-            throw new Error("User not found");
+        const user = await database("usuario").select("id", "nome", "email").where("id", id).first()
+        const cargos = await database("v_c_usuario").select("id_usuario", "id_cargo", "id_equipe", "equipe", "cargo", "aprovado").where("id_usuario", user.id)
+        const info = {
+            ...user,
+            cargos
         }
-        return user;
-	} catch (error) {
+        return info;
+    } catch (error) {
         console.log(error);
 		return {
 			message:error['message'],
