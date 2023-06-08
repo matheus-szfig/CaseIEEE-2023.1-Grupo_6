@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Equipes from "./pages/Equipes";
 import Admin from "./pages/Admin";
+import Cadastro from "./pages/Cadastro";
 import Login from "./pages/Login";
 
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/admin',
     element: <Admin/>
+  },
+  {
+    path: '/cadastro',
+    element: <Cadastro/>
   },
   {
      path: '/login',
