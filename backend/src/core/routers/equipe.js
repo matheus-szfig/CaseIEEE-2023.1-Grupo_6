@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { findAll, findMembrosByEquipe } from '../controllers/equipes/getController';
+import { findAll, findMembrosByEquipe } from '../controllers/equipes/getContoller';
 
 const router_equipe = Router();
 
