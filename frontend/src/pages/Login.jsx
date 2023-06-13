@@ -19,6 +19,12 @@ const Login = () => {
 
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
+    let input = document.getElementById("password");
+    if(showPassword){
+      input.style.paddingTop="1rem"
+    } else{
+      input.style.paddingTop="0.5rem"
+    }
   };
 
   async function handleEnvio(event) {
