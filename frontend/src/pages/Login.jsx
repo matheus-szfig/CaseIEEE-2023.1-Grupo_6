@@ -21,9 +21,9 @@ const Login = () => {
     setShowPassword(!showPassword);
     let input = document.getElementById("password");
     if(showPassword){
-      input.style.paddingTop="1rem"
+      input.style.paddingTop="0.94rem"
     } else{
-      input.style.paddingTop="0.5rem"
+      input.style.paddingTop="0.6rem"
     }
   };
 
