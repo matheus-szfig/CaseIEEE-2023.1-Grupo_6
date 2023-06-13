@@ -18,34 +18,45 @@ export async function findAllEquipes() {
 // Função responsável por buscar os membros de uma equipe pelo ID da equipe
 export async function findMembrosByEquipeId(equipeId) {
   try {
-    // Consulta ao banco de dados para selecionar os campos "id", "nome" e "equipeId" da tabela "membros"
-    // onde "equipeId" seja igual ao ID da equipe fornecido
-    const idUsuario = await database("usuario_equipe")
-      .select("id_usuario")
-      .where({"id_equipe" : equipeId});
+    //captura o id do usuario e o cargo dele a partir do equipeId
+    const ids_membros = await database("v_c_usuario")
+    .select("id_usuario","cargo")
+    .where({"id_equipe" : equipeId});
 
-      const nomeUsuario = await database("usuario")
-      .select("nome")
-      .where({"id" : idUsuario});  
+    //pega os ids dos usuarios da requisição acima e junta. Usado para filtrar os selects
+    const id_usuarios = ids_membros.map((membro) => membro.id_usuario);
 
-      const idCargo = await database("usuario_equipe")
-      .select("id_cargo")
-      .where({"id_usuario" : idUsuario});
+    //captura o id e o nome do usuario
+    const usuarios = await database("usuario")
+    .select("id", "nome")
+    .whereIn("id", id_usuarios);
 
-      const nomeCargo = await database("cargo")
-      .select("nome")
-      .where({"id" : idCargo});
-    
-    // Verificando se não foram encontrados membros
-    if (membros.length === 0) {
-      // Retornando null caso nenhum membro seja encontrado
-      return null;
+    // captura o id e o nome do cargo
+    const cargos = await database("v_c_usuario")
+    .select("id_usuario", "cargo")
+    .whereIn("id_usuario", id_usuarios);
+
+    //verificação
+    if(usuarios.length<=0 || cargos.length<=0){
+      throw new Error("Irregularidade. Usuarios ou cargos conflitantes");
     }
-    
+
+    //junta as informações onbtidas em uma resposta só
+    const info = usuarios.map((usuario) => {
+      const { id, nome } = usuario;
+      const membro = cargos.find((membro) => membro.id_usuario === usuario.id);
+      const cargo = membro ? membro.cargo : null;
+      return { id_usuario : id, nome, cargo };
+    });
+
+    //verificação
+    if(usuarios.length<=0 || cargos.length<=0){
+      throw new Error("Irregularidade. Equipe vazia");
+    }
     // Retornando os membros encontrados
     return {
-      nomeUsuario,
-      nomeCargo
+      status:true,
+      membros : info
     }
   } catch (error) {
     // Em caso de erro, exibindo o erro no console e lançando uma exceção
