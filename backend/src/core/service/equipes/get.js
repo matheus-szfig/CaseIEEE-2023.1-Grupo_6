@@ -4,10 +4,10 @@ import { database } from "../../../config/database";
 export async function findAllEquipes() {
   try {
     // Consulta ao banco de dados para selecionar os campos "id" e "nome" da tabela "equipes"
-    const equipes = await database("equipes").select("id", "nome");
+    const equipes = await database("equipe").select("nome");
     
     // Retornando as equipes encontradas
-    return equipes;
+    return{equipes};
   } catch (error) {
     // Em caso de erro, exibindo o erro no console e lançando uma exceção
     console.error("Erro ao buscar equipes:", error);
@@ -20,9 +20,21 @@ export async function findMembrosByEquipeId(equipeId) {
   try {
     // Consulta ao banco de dados para selecionar os campos "id", "nome" e "equipeId" da tabela "membros"
     // onde "equipeId" seja igual ao ID da equipe fornecido
-    const membros = await database("membros")
-      .select("id", "nome", "equipeId")
-      .where("equipeId", equipeId);
+    const idUsuario = await database("usuario_equipe")
+      .select("id_usuario")
+      .where({"id_equipe" : equipeId});
+
+      const nomeUsuario = await database("usuario")
+      .select("nome")
+      .where({"id" : idUsuario});  
+
+      const idCargo = await database("usuario_equipe")
+      .select("id_cargo")
+      .where({"id_usuario" : idUsuario});
+
+      const nomeCargo = await database("cargo")
+      .select("nome")
+      .where({"id" : idCargo});
     
     // Verificando se não foram encontrados membros
     if (membros.length === 0) {
@@ -31,7 +43,10 @@ export async function findMembrosByEquipeId(equipeId) {
     }
     
     // Retornando os membros encontrados
-    return membros;
+    return {
+      nomeUsuario,
+      nomeCargo
+    }
   } catch (error) {
     // Em caso de erro, exibindo o erro no console e lançando uma exceção
     console.error("Erro ao buscar membros da equipe:", error);
