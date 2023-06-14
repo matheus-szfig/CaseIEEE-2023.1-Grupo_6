@@ -38,7 +38,7 @@ export async function findMembrosByEquipeId(equipeId) {
 
     //verificação
     if(usuarios.length<=0 || cargos.length<=0){
-      throw new Error("Irregularidade. Usuarios ou cargos conflitantes");
+      throw new Error("Irregularidade. Equipe vazia");
     }
 
     //junta as informações onbtidas em uma resposta só
@@ -49,23 +49,25 @@ export async function findMembrosByEquipeId(equipeId) {
       return { id_usuario : id, nome, cargo };
     });
 
-    //verificação
-    if(usuarios.length<=0 || cargos.length<=0){
-      throw new Error("Irregularidade. Equipe vazia");
-    }
+    //captura o nome da equipe
+    const nomeEquipe = await database("equipe").select({nome_da_equipe:"nome"}).where({"id" : equipeId});
+
     // Retornando os membros encontrados
     return {
       status:true,
+      equipe_selecionada: nomeEquipe,
       membros : info
     }
   } catch (error) {
-    // Em caso de erro, exibindo o erro no console e lançando uma exceção
-    console.error("Erro ao buscar membros da equipe:", error);
-    throw new Error("Erro ao buscar membros da equipe");
+    // Em caso de erro, exibindo o erro
+    return {
+      status: false,
+			message:error['message']
+		}
   }
 }
 
-/*
+/* 
 import { database } from "../../../config/database";
 
 export async function findEquipeById(equipeId) {

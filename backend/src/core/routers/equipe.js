@@ -4,9 +4,9 @@ import { findAll, findMembrosByEquipe } from '../controllers/equipes/getContolle
 const router_equipe = Router();
 
 router_equipe.get('/', findAll);
-router_equipe.get('/:id/membros', findMembrosByEquipe); // Não sei se essa referência a id membros está correta
+router_equipe.get('/:id/membros', findMembrosByEquipe);//chechar referencia 
 
-/*
+/* ENCONTRAR EQUIPE ATRAVÉS DE UM ID
 import { findOne } from '../controllers/equipes/getController';
 router_equipe.get('/:id', findEquipe);
 */
