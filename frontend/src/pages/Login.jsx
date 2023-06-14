@@ -35,6 +35,7 @@ const Login = () => {
         toast.success(response.data.message);
         setTimeout(() => {
           navigate("/")
+          navigate(0)
         }, 1000);
 
       }

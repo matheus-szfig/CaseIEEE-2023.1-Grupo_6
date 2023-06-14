@@ -4,14 +4,7 @@ import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
 const authAtom = atom({
   key:'auth',
-  default:{
-    "id": 28,
-    "email": "teste_matheus@example.com",
-    "nome": "Matheus",
-    "permissions": [
-      "admin"
-    ]
-  }
+  default:false
 });
 
 const readyAtom = atom({
@@ -50,7 +43,8 @@ export const authInfo = selector({
     return {
       id:auth.id,
       nome:auth.nome,
-      email:auth.email
+      email:auth.email,
+      notify:auth.notify
     };
   }
 })
@@ -64,9 +58,9 @@ export function AuthContext ({children}) {
     try{
       const api = useApi();
 
-      // const {data} = await api.get('/user/auth');
-      // const authData = data.data;
-      // setAuth(authData);
+      const {data} = await api.get('/user/auth');
+      const authData = data.data;
+      setAuth(authData);
     }catch(e){
       setAuth(false);
     }

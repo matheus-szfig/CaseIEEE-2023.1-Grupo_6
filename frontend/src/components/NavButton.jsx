@@ -9,6 +9,7 @@ export default function NavButton ({title, icon, href}) {
           text-white hover:underline
           hover:bg-black/20 `}
           to={href}
+          reloadDocument={true}
         >
           <img className="pb-0.5 mr-2" src={icon} alt={title} />
           <span className="  hidden sm:inline">{title}</span>
