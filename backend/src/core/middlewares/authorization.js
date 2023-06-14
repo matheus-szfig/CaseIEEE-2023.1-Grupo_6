@@ -1,8 +1,9 @@
 import { request, response } from "express";
 
-export default function Authorize(permissionlist, {type, key}="") {
+export default function Authorize(permissionlist, [type, key]=[]) {
 
   return (req = request, res = response, next) => {
+    const userInfo = req.cookies['access_token'];
 
     try{
       const allow = userInfo.permissions.reduce((acc, v) => {
