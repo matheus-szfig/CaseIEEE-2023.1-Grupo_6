@@ -8,7 +8,8 @@ export default async function AuthToken (payload) {
     const user = await database('usuario').select({
       id:"id",
       email:"email",
-      nome:"nome"
+      nome:"nome",
+      notify:"notify"
     }).where({
       id:userInfo.id
     }).first();

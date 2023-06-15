@@ -40,7 +40,8 @@ const Login = () => {
       if (response.data.status === true) {
         toast.success(response.data.message);
         setTimeout(() => {
-          navigate("/");
+          navigate("/")
+          navigate(0)
         }, 1000);
       } else {
         toast.error(response.data.message);

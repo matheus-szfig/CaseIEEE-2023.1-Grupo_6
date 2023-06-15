@@ -13,14 +13,8 @@ import { toast } from 'react-toastify';
 const Profile = () => {
 
   const [cargos, setCargos] = useState([]);
-  const authInfo = useRecoilValue(authInfoSelector);
+  const userInfo = useRecoilValue(authInfoSelector);
   const [changePass, setChangePass] = useState(false);
-
-  const [userInfo, setUserInfo] = useState({
-    nome: "Matheus de Souza Figueiredo",
-    email: "darkcorner.dev@gmail.com",
-    notify:1
-  });
 
   const [newPassoword, setNewPassoword] = useState({
     old:"",
@@ -43,6 +37,7 @@ const Profile = () => {
       {equipe:"WolfRocket", cargo:"Assessor", active:1, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"},
       {equipe:"WolfBotz", cargo:"Membro Técnico", active:0, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"}
     ]);
+
   }
 
   function SaveData (e) {
@@ -55,7 +50,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <AuthComponent>
+    <AuthComponent redirect={'/login'}>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>
           <h1 className='text-3xl font-bold text-primary'>Configurações</h1>

@@ -59,7 +59,7 @@ const Navbar = () => {
           </li> */}
 
 					<li className="cursor-pointer">
-						<Link to="/profile">
+						<Link to="/profile" reloadDocument={true}>
 							<div className="flex items-center justify-center m-2">
 								<img
 									src={process.env.PUBLIC_URL+"/UserCircle.svg"}
