@@ -4,7 +4,7 @@ import { database } from "../../../config/database";
 export async function findAllEquipes() {
   try {
     // Consulta ao banco de dados para selecionar os campos "id" e "nome" da tabela "equipes"
-    const equipes = await database("equipe").select("nome");
+    const equipes = await database("equipe").select("id","nome").orderBy("id", "asc");
     
     // Retornando as equipes encontradas
     return{equipes};
