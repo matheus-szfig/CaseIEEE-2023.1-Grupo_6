@@ -8,7 +8,11 @@ export async function deleteEquipeService(id) {
 			throw new Error("Equipe not found!");
 		}
 
-		const equipeDeleted = await database("equipe").where({ id }).delete();
+		// remove as dependencias na tabela usuario_equipe
+		await database("usuario_equipe").where({ id_equipe: id }).delete();
+
+		await database("equipe").where({ id }).delete();
+
 		return {
 			status: true,
 			message: "Equipe deleted!",
