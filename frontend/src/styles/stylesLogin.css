@@ -9,29 +9,36 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #E6E6E6;
-}
+  height: 100vh; /* Altura igual à altura da tela */
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(24, 23, 23); /* Cor semitransparente */
+  background-blend-mode: overlay;
 
+  }
+  
 .loginform .header {
   width: 28.8rem;
-  height: 10rem; /* Reduzida a altura */
+  height: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 2rem; 
+  margin-top: 2rem;
 }
 
 .loginform .header .ieee-logo {
   width: 5rem;
   height: 5rem;
   margin-bottom: 0.6rem;
+
 }
 
 .loginform .header h1,
 .loginform .header h2 {
   font-weight: 800;
-  font-size: 2.2rem; /* Reduzido o tamanho dos títulos */
+  font-size: 2.2rem;
   line-height: 1.2;
   color: #0D5FAA;
 }
@@ -54,11 +61,11 @@ html, body {
 
 .loginform form h1 {
   font-weight: 700;
-  font-size: 2rem; 
+  font-size: 2rem;
   line-height: 1.2;
   color: #0D5FAA;
   margin-top: 0;
-  margin-bottom: 0.5rem; 
+  margin-bottom: 0.5rem;
 }
 
 .loginform form .titleLine {
@@ -84,7 +91,14 @@ html, body {
   color: #0D5FAA;
 }
 
-.loginform form .inputLoginform input {
+.loginform .inputLoginform.emailBlock label {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+  color: #0D5FAA;
+}
+
+.loginform .inputLoginform.emailBlock input {
   padding: 0.96rem;
   width: 100%;
   max-width: 22.4rem;
@@ -94,6 +108,32 @@ html, body {
   background: #E6E6E6;
   outline: none;
   border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.loginform .inputLoginform.passwordBlock label {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+  color: #0D5FAA;
+}
+
+.loginform .inputLoginform.passwordBlock .relative {
+  position: relative;
+}
+
+.loginform .inputLoginform.passwordBlock .relative input {
+  padding: 0.96rem;
+  width: 100%;
+  max-width: 22.4rem;
+  height: 2.3rem;
+  border-radius: 0.32rem;
+  margin-bottom: 0.4rem;
+  background: #E6E6E6;
+  outline: none;
+  border: none;
+  padding-bottom: 0.5rem;
 }
 
 .loginform form .button {
@@ -106,7 +146,7 @@ html, body {
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.1rem;
-  margin-top: 0.4rem;
+  margin-top: 0.8rem;
 }
 
 .loginform form .button:hover {
@@ -118,7 +158,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .loginform form .footer p {
