@@ -6,11 +6,11 @@ export async function deleteCargo(req = request, res = response) {
     try { 
         const deletar = await deleteCargoService(cargoId);
         if (!deletar) {
-            return res.status(404).json({ error: 'Equipe não encontrada' });
+            return res.status(404).json({ error: 'Cargo não encontrado' });
         }
         res.json(deletar);
     } catch (error) {
-        console.error('Erro ao buscar cargos:', error);
-        res.status(500).json({ error: 'Erro ao buscar cargos' });
+        console.error('Erro ao deletar cargo:', error);
+        res.status(500).json({ error: 'Erro ao deletar cargo' });
       }
 }
