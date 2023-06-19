@@ -171,7 +171,7 @@ const Profile = () => {
                       return !cargos[i] ?
                         <EmptyRole /> :
                         (
-                          !cargos[i].active ?
+                          !cargos[i].aprovado ?
                             <DisabledRole active={cargos[i].active} id_usuario={userInfo.id} id_cargo={cargos[i].id_cargo} id_equipe={cargos[i].id_equipe} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/> :
                             <ActiveRole active={cargos[i].active} id_usuario={userInfo.id} id_cargo={cargos[i].id_cargo} id_equipe={cargos[i].id_equipe} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/>
                         )

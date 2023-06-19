@@ -13,7 +13,7 @@ export default function Authorize(permissionlist, [type, key]=[]) {
       const exist = !!type && !!key ? req[type][key] == userInfo[key] : true
 
       if(!allow && exist){
-        throw { status:403, message:"User does not have rights" }
+        throw { status:403, message:"Usuario não possui permissão!" }
       }
 
       next();
