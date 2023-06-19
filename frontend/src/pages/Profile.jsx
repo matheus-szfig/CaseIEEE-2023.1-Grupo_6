@@ -9,6 +9,8 @@ import PictureTab from '../components/profile/PictureTab'
 import { useRecoilValue } from 'recoil';
 import '../styles/Profile.css';
 import { toast } from 'react-toastify';
+import EditBtn from '../components/profile/EditButton';
+import CancelBtn from '../components/profile/CancelButton';
 
 const Profile = () => {
 
@@ -16,8 +18,9 @@ const Profile = () => {
   const userInfo = useRecoilValue(authInfoSelector);
   const [changePass, setChangePass] = useState(false);
 
-  const [newPassoword, setNewPassoword] = useState({
-    old:"",
+  const [notify, setNotify] = useState(userInfo.notify)
+
+  const [newPassword, setNewPassword] = useState({
     current: "",
     new: "",
     confirm:""
@@ -45,6 +48,21 @@ const Profile = () => {
     toast.success("Salvo!")
   }
 
+  function PassFormField(field, e, value = e.target.value) {
+    if(e) e.preventDefault();
+    const obj = {...newPassword};
+    obj[field] = value;
+    setNewPassword(obj);
+  }
+
+  useEffect(() => {
+    setNewPassword({
+      current:'',
+      new:'',
+      confirm:''
+    })
+  }, [changePass]);
+
   useEffect(() => {
     LoadResources ();
   }, []);
@@ -70,8 +88,14 @@ const Profile = () => {
                   <div className='flex flex-inline flex-col w-[100%] ps-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="senha">Senha Atual</label>
                     <div className='flex flex-inline w-[100%]'>
-                      <input id="senha" className='rounded-s border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='current-password' name='current-password' type='password' value={'0'.repeat(10)} disabled={!changePass}/>
-                      <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}>{!changePass ? "E" : "X"}</button>
+                      <input id="senha" className='rounded-s border border-gray-300 w-[100%] h-10 p-2 bg-gray-100'
+                        autoComplete='current-password' name='current-password' type='password'
+                        value={'0'.repeat(10)} disabled
+                      />
+                      {changePass ?
+                      <CancelBtn className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}/>:
+                      <EditBtn className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-3 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}/>}
+                      
                     </div>
                   </div>
                 </div>
@@ -79,11 +103,17 @@ const Profile = () => {
                 <div id="changePassForm" className='flex justify-between mt-5'>
                   <div className='flex flex-inline flex-col w-[100%] pe-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Nova Senha</label>
-                    <input id="new-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='new-password' name='new-password' type='password'/>
+                    <input value={newPassword.new} id="new-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100'
+                      autoComplete='new-password' name='new-password' type='text'
+                      onChange={e => PassFormField('new', e)}
+                    />
                   </div>
                   <div className='flex flex-inline flex-col w-[100%] ps-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Confirmar Senha</label>
-                    <input id="confirm-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='confirm-password' type='password'/>
+                    <input value={newPassword.confirm} id="confirm-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100'
+                      name='confirm-password' type='text'
+                      onChange={e => PassFormField('confirm', e)}
+                    />
                   </div>
                 </div>
 
@@ -109,7 +139,7 @@ const Profile = () => {
                 <h1 className='text-3xl text-primary font-bold mt-7'>Preferências</h1>
                 <div className='flex justify-between mt-5 pb-8'>
                     <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" checked={userInfo.notify} class="w-5 h-5 bg-gray-100 border-gray-300 rounded-full focus:ring-primary focus:color-primary focus:ring-2" />
+                        <input id="default-checkbox" type="checkbox" onChange={e => setNotify(e.target.checked)} checked={notify} class="w-5 h-5 bg-gray-100 border-gray-300 rounded-full focus:ring-primary focus:color-primary focus:ring-2" />
                         <label for="default-checkbox" class="ml-2 text-md font-medium text-primary/70">Receber atualizações por e-mail</label>
                     </div>
                     <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded' onClick={SaveData}>Salvar</button>

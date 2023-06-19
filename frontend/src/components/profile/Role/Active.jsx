@@ -1,3 +1,6 @@
+import CancelBtn from "../CancelButton";
+import EditBtn from "../EditButton";
+
 export default function ActiveRole ({id, cargo, equipe, img}) {
 
   function RemoveCargo (e) {
@@ -19,9 +22,9 @@ export default function ActiveRole ({id, cargo, equipe, img}) {
           </div>
         </div>
         <div className='flex flex-col justify-center'>
-          <div>
-            <button className='bg-white hover:bg-gray-300 rounded h-8 w-8 me-3' onClick={EditCargo}>E</button>
-            <button className='bg-white hover:bg-gray-300 rounded h-8 w-8' onClick={RemoveCargo}>R</button>
+          <div className="flex">
+            <EditBtn className='bg-white hover:bg-gray-300 rounded h-8 w-8 me-3 py-1' onClick={EditCargo}/>
+            <CancelBtn className='bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary' onClick={RemoveCargo}>R</CancelBtn>
           </div>
         </div>
       </div>
