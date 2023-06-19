@@ -9,6 +9,7 @@ import CadastrateUser from "../controllers/users/cadastroController";
 import Authorize from "../middlewares/authorization";
 import AuthUser from "../controllers/users/auth";
 import Authenticate from "../middlewares/authentication";
+import InactivateUser from "../controllers/users/inactivate";
 
 const router_usuario = Router();
 
@@ -28,6 +29,7 @@ router_usuario.patch("/update/:id", Authenticate, Authorize(['admin'], ['params'
 
 // delete
 router_usuario.delete("/delete/:id", Authenticate, Authorize(['admin'], ['params', 'id']), DeleteUser);
+router_usuario.delete("/inactivate/:id", Authenticate, Authorize(['admin'], ['params', 'id']), InactivateUser);
 
 
 
