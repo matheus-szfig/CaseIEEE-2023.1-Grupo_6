@@ -24,7 +24,7 @@ router_usuario.post("/login", LoginUser);
 router_usuario.post("/cadaster", CadastrateUser);
 
 // update
-router_usuario.patch("/update/:id",UpdateUser);
+router_usuario.patch("/update/:id", Authenticate, Authorize(['admin'], ['params', 'id']), UpdateUser);
 
 // delete
 router_usuario.delete("/delete/:id", Authenticate, Authorize(['admin'], ['params', 'id']), DeleteUser);

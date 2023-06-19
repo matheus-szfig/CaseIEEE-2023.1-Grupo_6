@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import {
   AuthComponent,
-  authInfo as authInfoSelector
+  authInfo as authInfoSelector,
+  authReady
 } from '../components/Auth'
 import { ActiveRole, DisabledRole, EmptyRole} from '../components/profile/Role/Index';
 import PictureTab from '../components/profile/PictureTab'
@@ -11,21 +12,31 @@ import '../styles/Profile.css';
 import { toast } from 'react-toastify';
 import EditBtn from '../components/profile/EditButton';
 import CancelBtn from '../components/profile/CancelButton';
+import useApi from '../hooks/useApi';
+import ModalAddCargos from '../components/profile/ModalAddCargos';
+import ModalRemoveCargos from '../components/profile/ModalRemoveCargos';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-
-  const [cargos, setCargos] = useState([]);
+  //recoil selectors
   const userInfo = useRecoilValue(authInfoSelector);
+  const isReady = useRecoilValue(authReady);
+
+  // not shared states
+  const [cargos, setCargos] = useState([]);
+  const [notify, setNotify] = useState(false);
   const [changePass, setChangePass] = useState(false);
-
-  const [notify, setNotify] = useState(userInfo.notify)
-
+  const [changeCargos, setChangeCargos] = useState(false);
+  const [addCargos, setAddCargos] = useState(false);
   const [newPassword, setNewPassword] = useState({
     current: "",
     new: "",
     confirm:""
   });
 
+  const navigate = useNavigate();
+
+  const api = useCallback(useApi, [])();
 
   function ToggleEditPass (e) {
     e.preventDefault();
@@ -34,18 +45,48 @@ const Profile = () => {
     setChangePass(!changePass);
   }
 
-  function LoadResources () {
-    // carrega os dados do usuário aqui
-    setCargos([
-      {equipe:"WolfRocket", cargo:"Assessor", active:1, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"},
-      {equipe:"WolfBotz", cargo:"Membro Técnico", active:0, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"}
-    ]);
-
+  async function LoadResources () {
+    if(!!userInfo.id){
+      setNotify(userInfo.notify);
+      const userGet = await api.get(`/user/${userInfo.id}`);
+      const userCargos = userGet.data.cargos.map(v => ({...v, img:'https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg'}));
+  
+      // carrega os dados do usuário aqui
+      setCargos(userCargos);
+    }
   }
 
-  function SaveData (e) {
+  function PasswordTest () {
+    if(newPassword.new.length < 5) return "Senha menor que 5 caracteres!";
+    if(newPassword.new !== newPassword.confirm) return "Senha e confirmação de senha não conferem!";
+    return false;
+  }
+
+  async function SaveData (e) {
     e.preventDefault();
-    toast.success("Salvo!")
+    const failPassTest = PasswordTest();
+    if(failPassTest && !!changePass){
+      toast.warning(failPassTest);
+      return;
+    }
+
+    let newInfo = {notify}
+
+    try{
+      if(!!changePass) newInfo['password'] = newPassword.new;
+      const response = api.patch(`/user/update/${userInfo.id}`, newInfo);
+
+      toast.promise(response, {
+        success:'Atualizado com sucesso!'
+      });
+
+      await response;
+      setTimeout(() => navigate(0), 1000);
+
+    }catch(e){
+      console.log(e);
+    }
+    
   }
 
   function PassFormField(field, e, value = e.target.value) {
@@ -65,10 +106,12 @@ const Profile = () => {
 
   useEffect(() => {
     LoadResources ();
-  }, []);
+  }, [isReady]);
 
   return (
     <AuthComponent redirect={'/login'}>
+        <ModalAddCargos/>
+        <ModalRemoveCargos/>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>
           <h1 className='text-3xl font-bold text-primary'>Configurações</h1>
@@ -129,8 +172,8 @@ const Profile = () => {
                         <EmptyRole /> :
                         (
                           !cargos[i].active ?
-                            <DisabledRole active={cargos[i].active} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/> :
-                            <ActiveRole active={cargos[i].active} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/>
+                            <DisabledRole active={cargos[i].active} id_usuario={userInfo.id} id_cargo={cargos[i].id_cargo} id_equipe={cargos[i].id_equipe} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/> :
+                            <ActiveRole active={cargos[i].active} id_usuario={userInfo.id} id_cargo={cargos[i].id_cargo} id_equipe={cargos[i].id_equipe} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/>
                         )
                     })
                   }

@@ -1,14 +1,15 @@
+import { useRecoilState } from "recoil";
 import CancelBtn from "../CancelButton";
-import EditBtn from "../EditButton";
+import { removeCargosModalShowAtom, cargoRemovingAtom } from "../ModalRemoveCargos";
 
-export default function ActiveRole ({id, cargo, equipe, img}) {
+export default function ActiveRole ({id_usuario, id_equipe, id_cargo, cargo, equipe, img}) {
+  const [_c, setCargo] = useRecoilState(cargoRemovingAtom);
+  const [_r, setRemovingCargo] = useRecoilState(removeCargosModalShowAtom);
 
   function RemoveCargo (e) {
     e.preventDefault();
-  }
-
-  function EditCargo (e) {
-    e.preventDefault();
+    setRemovingCargo(true);
+    setCargo({id_usuario, id_equipe, id_cargo});
   }
 
   return (
@@ -23,8 +24,9 @@ export default function ActiveRole ({id, cargo, equipe, img}) {
         </div>
         <div className='flex flex-col justify-center'>
           <div className="flex">
-            <EditBtn className='bg-white hover:bg-gray-300 rounded h-8 w-8 me-3 py-1' onClick={EditCargo}/>
-            <CancelBtn className='bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary' onClick={RemoveCargo}>R</CancelBtn>
+            <CancelBtn className='bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary'
+              onClick={RemoveCargo}
+            />
           </div>
         </div>
       </div>

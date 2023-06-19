@@ -1,20 +1,14 @@
 import { database } from "../../../config/database";
 
-export async function approveCargoService(id) {
+export async function approveCargoService(id_cargo, id_usuario, id_equipe) {
   try {
-    const cargo = await database("cargos").select("*").where({ id }).first();
+    const cargo = await database("usuario_equipe").select("*").where({ id_cargo, id_usuario, id_equipe }).first();
 
     if (!cargo) {
       throw new Error("Cargo não encontrado");
     }
 
-    const isAdmin = true; // Verificar se o usuário logado é um administrador
-
-    if (!isAdmin) {
-      throw new Error("Apenas administradores podem aprovar cargos");
-    }
-
-    await database("cargos").where({ id }).update({ aprovado: true });
+    await database("usuario_equipe").where({ id }).update({ aprovado: 1 });
 
     return {
       status: true,
