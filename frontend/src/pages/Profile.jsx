@@ -1,28 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import {
   AuthComponent,
-  authInfo as authInfoSelector
+  authInfo as authInfoSelector,
+  authReady
 } from '../components/Auth'
 import { ActiveRole, DisabledRole, EmptyRole} from '../components/profile/Role/Index';
 import PictureTab from '../components/profile/PictureTab'
 import { useRecoilValue } from 'recoil';
 import '../styles/Profile.css';
 import { toast } from 'react-toastify';
+import EditBtn from '../components/profile/EditButton';
+import CancelBtn from '../components/profile/CancelButton';
+import useApi from '../hooks/useApi';
+import ModalAddCargos from '../components/profile/ModalAddCargos';
+import ModalRemoveCargos from '../components/profile/ModalRemoveCargos';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-
-  const [cargos, setCargos] = useState([]);
+  //recoil selectors
   const userInfo = useRecoilValue(authInfoSelector);
-  const [changePass, setChangePass] = useState(false);
+  const isReady = useRecoilValue(authReady);
 
-  const [newPassoword, setNewPassoword] = useState({
-    old:"",
+  // not shared states
+  const [cargos, setCargos] = useState([]);
+  const [notify, setNotify] = useState(false);
+  const [changePass, setChangePass] = useState(false);
+  const [changeCargos, setChangeCargos] = useState(false);
+  const [addCargos, setAddCargos] = useState(false);
+  const [newPassword, setNewPassword] = useState({
     current: "",
     new: "",
     confirm:""
   });
 
+  const navigate = useNavigate();
+
+  const api = useCallback(useApi, [])();
 
   function ToggleEditPass (e) {
     e.preventDefault();
@@ -31,26 +45,73 @@ const Profile = () => {
     setChangePass(!changePass);
   }
 
-  function LoadResources () {
-    // carrega os dados do usuário aqui
-    setCargos([
-      {equipe:"WolfRocket", cargo:"Assessor", active:1, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"},
-      {equipe:"WolfBotz", cargo:"Membro Técnico", active:0, img:"https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg"}
-    ]);
-
+  async function LoadResources () {
+    if(!!userInfo.id){
+      setNotify(userInfo.notify);
+      const userGet = await api.get(`/user/${userInfo.id}`);
+      const userCargos = userGet.data.cargos.map(v => ({...v, img:'https://res.cloudinary.com/dz209s6jk/image/upload/v1667610815/Avatars/tvtjtfyahz9ut6cocvqp.jpg'}));
+  
+      // carrega os dados do usuário aqui
+      setCargos(userCargos);
+    }
   }
 
-  function SaveData (e) {
+  function PasswordTest () {
+    if(newPassword.new.length < 5) return "Senha menor que 5 caracteres!";
+    if(newPassword.new !== newPassword.confirm) return "Senha e confirmação de senha não conferem!";
+    return false;
+  }
+
+  async function SaveData (e) {
     e.preventDefault();
-    toast.success("Salvo!")
+    const failPassTest = PasswordTest();
+    if(failPassTest && !!changePass){
+      toast.warning(failPassTest);
+      return;
+    }
+
+    let newInfo = {notify}
+
+    try{
+      if(!!changePass) newInfo['password'] = newPassword.new;
+      const response = api.patch(`/user/update/${userInfo.id}`, newInfo);
+
+      toast.promise(response, {
+        success:'Atualizado com sucesso!'
+      });
+
+      await response;
+      setTimeout(() => navigate(0), 1000);
+
+    }catch(e){
+      console.log(e);
+    }
+    
+  }
+
+  function PassFormField(field, e, value = e.target.value) {
+    if(e) e.preventDefault();
+    const obj = {...newPassword};
+    obj[field] = value;
+    setNewPassword(obj);
   }
 
   useEffect(() => {
+    setNewPassword({
+      current:'',
+      new:'',
+      confirm:''
+    })
+  }, [changePass]);
+
+  useEffect(() => {
     LoadResources ();
-  }, []);
+  }, [isReady]);
 
   return (
     <AuthComponent redirect={'/login'}>
+        <ModalAddCargos/>
+        <ModalRemoveCargos/>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>
           <h1 className='text-3xl font-bold text-primary'>Configurações</h1>
@@ -70,8 +131,14 @@ const Profile = () => {
                   <div className='flex flex-inline flex-col w-[100%] ps-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="senha">Senha Atual</label>
                     <div className='flex flex-inline w-[100%]'>
-                      <input id="senha" className='rounded-s border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='current-password' name='current-password' type='password' value={'0'.repeat(10)} disabled={!changePass}/>
-                      <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}>{!changePass ? "E" : "X"}</button>
+                      <input id="senha" className='rounded-s border border-gray-300 w-[100%] h-10 p-2 bg-gray-100'
+                        autoComplete='current-password' name='current-password' type='password'
+                        value={'0'.repeat(10)} disabled
+                      />
+                      {changePass ?
+                      <CancelBtn className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}/>:
+                      <EditBtn className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-3 outline outline-4 -outline-offset-4 outline-primary rounded-e' onClick={ToggleEditPass}/>}
+                      
                     </div>
                   </div>
                 </div>
@@ -79,11 +146,17 @@ const Profile = () => {
                 <div id="changePassForm" className='flex justify-between mt-5'>
                   <div className='flex flex-inline flex-col w-[100%] pe-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Nova Senha</label>
-                    <input id="new-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' autoComplete='new-password' name='new-password' type='password'/>
+                    <input value={newPassword.new} id="new-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100'
+                      autoComplete='new-password' name='new-password' type='text'
+                      onChange={e => PassFormField('new', e)}
+                    />
                   </div>
                   <div className='flex flex-inline flex-col w-[100%] ps-5'>
                     <label className='text-md font-bold text-primary opacity-70' for="email">Confirmar Senha</label>
-                    <input id="confirm-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100' name='confirm-password' type='password'/>
+                    <input value={newPassword.confirm} id="confirm-password" className='rounded border border-gray-300 w-[100%] h-10 p-2 bg-gray-100'
+                      name='confirm-password' type='text'
+                      onChange={e => PassFormField('confirm', e)}
+                    />
                   </div>
                 </div>
 
@@ -98,9 +171,9 @@ const Profile = () => {
                       return !cargos[i] ?
                         <EmptyRole /> :
                         (
-                          !cargos[i].active ?
-                            <DisabledRole active={cargos[i].active} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/> :
-                            <ActiveRole active={cargos[i].active} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/>
+                          !cargos[i].aprovado ?
+                            <DisabledRole active={cargos[i].active} id_usuario={userInfo.id} id_cargo={cargos[i].id_cargo} id_equipe={cargos[i].id_equipe} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/> :
+                            <ActiveRole active={cargos[i].active} id_usuario={userInfo.id} id_cargo={cargos[i].id_cargo} id_equipe={cargos[i].id_equipe} equipe={cargos[i].equipe} cargo={cargos[i].cargo} img={cargos[i].img}/>
                         )
                     })
                   }
@@ -109,7 +182,7 @@ const Profile = () => {
                 <h1 className='text-3xl text-primary font-bold mt-7'>Preferências</h1>
                 <div className='flex justify-between mt-5 pb-8'>
                     <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" checked={userInfo.notify} class="w-5 h-5 bg-gray-100 border-gray-300 rounded-full focus:ring-primary focus:color-primary focus:ring-2" />
+                        <input id="default-checkbox" type="checkbox" onChange={e => setNotify(e.target.checked)} checked={notify} class="w-5 h-5 bg-gray-100 border-gray-300 rounded-full focus:ring-primary focus:color-primary focus:ring-2" />
                         <label for="default-checkbox" class="ml-2 text-md font-medium text-primary/70">Receber atualizações por e-mail</label>
                     </div>
                     <button className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded' onClick={SaveData}>Salvar</button>
