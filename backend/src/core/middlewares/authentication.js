@@ -17,7 +17,7 @@ export default async function Authenticate(req = request, res = response, next) 
 
     next();
   }catch(e){
-    res.status(401).send({status:false, message:'Invalid or missing access token'});
+    res.status(401).send({status:false, message:'Token de acesso inválido ou inexistente!'});
   }
 
 }

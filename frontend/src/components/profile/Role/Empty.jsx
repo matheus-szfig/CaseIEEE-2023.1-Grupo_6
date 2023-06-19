@@ -1,7 +1,14 @@
+
+import { useRecoilState } from "recoil";
+import { addCargosModalShowAtom } from "../ModalAddCargos";
+
 export default function EmptyRole () {
+
+  const [addingCargo, setAddingCargo] = useRecoilState(addCargosModalShowAtom);
 
   function AddRole (e) {
     e.preventDefault();
+    setAddingCargo(true);
   }
 
   return (
