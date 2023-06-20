@@ -111,7 +111,7 @@ const Profile = () => {
   return (
     <AuthComponent redirect={'/login'}>
         <ModalAddCargos/>
-        <ModalRemoveCargos/>
+        <ModalRemoveCargos text="Realmente deseja remover esse cargo? Essa ação é permanente e caso adicione o cargo novamente, o administrador precisará aprovar."/>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>
           <h1 className='text-3xl font-bold text-primary'>Configurações</h1>

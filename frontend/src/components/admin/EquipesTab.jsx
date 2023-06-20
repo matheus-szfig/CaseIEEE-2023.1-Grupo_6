@@ -5,6 +5,8 @@ import EquipeComponent from './Equipe';
 import UseApi from '../../hooks/useApi';
 import { atom, useRecoilState } from 'recoil';
 
+
+
 export const equipeSelected = atom({
   key:'equipeSelected',
   default:null
@@ -20,6 +22,7 @@ export default function EquipesTab () {
   async function LoadResources() {
     const equipeGet = await api.get('/equipe');
     setListEquipes(equipeGet.data.equipes);
+
   }
 
   useEffect(() => {
