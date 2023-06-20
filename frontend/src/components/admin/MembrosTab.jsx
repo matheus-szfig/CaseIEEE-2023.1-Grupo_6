@@ -39,7 +39,7 @@ export default function MembrosTab () {
   }, []);
 
   return (
-    <div className='rounded border border-light-gray h-[100%] p-3 shadow-md w-[100%] md:w-2/4 lg:w-2/3 xl:w-3/4 md:me-1 mb-5'>
+    <div className='rounded border border-light-gray p-3 shadow-md w-[100%] md:w-2/4 lg:w-2/3 xl:w-3/4 md:me-1 mb-5'>
       <div className='w-[100%] flex justify-between px-4 pb-2'>
         <h3 className="mt-1 text-xl text-primary font-medium">Membros</h3>
       </div>
