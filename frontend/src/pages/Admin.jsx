@@ -20,7 +20,7 @@ const Home = () => {
         <ModalDeleteEquipes text={"Deseja deletar esta equipe?"}/>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>
-          <h1 className='text-3xl font-bold text-primary'>Painel</h1>
+          <h1 className='text-3xl font-bold text-primary'>Painel de Administrador</h1>
           <div className='mt-6 block md:flex'>
             <EquipesTab />
             <MembrosTab />
