@@ -24,41 +24,36 @@ export default function MembrosTab() {
 		setListMembros(data);
 	}
 
-  useEffect(() => {
+	useEffect(() => {
+		const members = listMembros.filter((v) => {
+			for (let i = 0; i < 3; i++) {
+				if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
+					return true;
+				}
+			}
+			return false;
+		});
 
-    const members = listMembros.filter((v) => {
-      for (let i = 0; i < 3; i++) {
-        if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
-          return true;
-        }
-      }
-      return false;
-    });
-
-    setEquipeMembros(members);
-  }, [equipeSel]);
+		setEquipeMembros(members);
+	}, [equipeSel]);
 
 	useEffect(() => {
 		const idEquipe = getParams("idEquipe");
 		if (idEquipe) {
-      
 			setEquipeSelected(idEquipe);
-      
-      const members = listMembros.filter((v) => {
-        for (let i = 0; i < 3; i++) {
-          if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
-            return true;
-          }
-        }
-        return false;
-      });
-  
-      setEquipeMembros(members);
 
+			const members = listMembros.filter((v) => {
+				for (let i = 0; i < 3; i++) {
+					if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
+						return true;
+					}
+				}
+				return false;
+			});
+
+			setEquipeMembros(members);
 		}
- 
 	}, [listMembros]);
-
 
 	useEffect(() => {
 		LoadResources();

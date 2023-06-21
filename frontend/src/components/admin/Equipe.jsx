@@ -3,9 +3,22 @@ import CancelBtn from "../profile/CancelButton";
 import EditBtn from "../profile/EditButton";
 import { equipeSelected } from "./EquipesTab";
 import { useEffect } from "react";
+import {
+	equipeUpdateAtom,
+	updateEquipesModalShowAtom,
+} from "./ModalUpdateEquipe";
+import {
+	deleteEquipesModalShowAtom,
+	equipeDeleteAtom,
+} from "./ModalDeleteEquipe";
 
 export default function EquipeComponent({ id, nome }) {
 	const [selected, setSelected] = useRecoilState(equipeSelected);
+	const [_ue, setUpdatedEquipe] = useRecoilState(equipeUpdateAtom);
+	const [_u, setUpdatingEquipe] = useRecoilState(updateEquipesModalShowAtom);
+	const [_de, setDeletedEquipe] = useRecoilState(equipeDeleteAtom);
+	const [_d, setDeletingEquipe] = useRecoilState(deleteEquipesModalShowAtom);
+
 	function setParams(param, value) {
 		let params = new URL(document.location).searchParams;
 
@@ -17,6 +30,18 @@ export default function EquipeComponent({ id, nome }) {
 			document.location.pathname + `?${params.toString()}`
 		);
 	}
+
+	function UpdateEquipe(e, id_equipe) {
+		e.preventDefault();
+		setUpdatingEquipe(true);
+		setUpdatedEquipe({ id_equipe });
+	}
+	function DeleteEquipe(e, id_equipe) {
+		e.preventDefault();
+		setDeletingEquipe(true);
+		setDeletedEquipe({ id_equipe });
+	}
+
 	return (
 		<div
 			className={
@@ -38,8 +63,14 @@ export default function EquipeComponent({ id, nome }) {
 			</div>
 			<div className="flex flex-col justify-center py-3">
 				<div className="flex">
-					<EditBtn className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary me-2" />
-					<CancelBtn className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary" />
+					<EditBtn
+						onClick={(e) => UpdateEquipe(e, id)}
+						className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary me-2"
+					/>
+					<CancelBtn
+						onClick={(e) => DeleteEquipe(e, id)}
+						className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary"
+					/>
 				</div>
 			</div>
 		</div>

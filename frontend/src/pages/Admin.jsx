@@ -5,6 +5,9 @@ import EquipesTab from "../components/admin/EquipesTab";
 import MembrosTab from "../components/admin/MembrosTab";
 import ModalRemoveCargos from "../components/profile/ModalRemoveCargos";
 import ModalApproveCargos from "../components/admin/ModalApproveCargos";
+import ModalUpdateEquipes from "../components/admin/ModalUpdateEquipe";
+import ModalDeleteEquipes from "../components/admin/ModalDeleteEquipe";
+import ModalCreateEquipes from "../components/admin/ModalCreateEquipe";
 
 const Home = () => {
   return (
@@ -12,6 +15,9 @@ const Home = () => {
     <AuthComponent permissions={['admin']} redirect={'/'}>
         <ModalRemoveCargos text="Deseja realmente apagar o cargo deste usuário?"/>
         <ModalApproveCargos text={"Deseja aprovar o cargo deste usuário?"}/>
+        <ModalUpdateEquipes />
+        <ModalCreateEquipes/>
+        <ModalDeleteEquipes text={"Deseja deletar esta equipe?"}/>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>
           <h1 className='text-3xl font-bold text-primary'>Painel</h1>
