@@ -3,6 +3,7 @@ import { deleteCargoService } from "../../service/cargo/delete";
 
 export async function deleteCargo(req = request, res = response) {
     const cargoId = req.params.id;
+
     try { 
         const deletar = await deleteCargoService(cargoId);
         if (!deletar) {
