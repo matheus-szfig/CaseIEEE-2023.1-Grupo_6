@@ -42,8 +42,8 @@ export default function ModalInactivateCargos({ text }) {
 			});
 
 			toast.promise(prom, {
-				pending: "Inactivatendo...",
-				success: "Cargo removido com sucesso!",
+				pending: "Inativando...",
+				success: "Usuário inativado com sucesso!",
 			});
 
 			await prom;

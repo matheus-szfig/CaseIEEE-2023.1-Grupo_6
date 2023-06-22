@@ -105,6 +105,8 @@ const Profile = () => {
 		}
 	}
 
+
+
 	function PassFormField(field, e, value = e.target.value) {
 		if (e) e.preventDefault();
 		const obj = { ...newPassword };
