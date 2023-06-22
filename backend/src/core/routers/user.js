@@ -22,7 +22,7 @@ router_usuario.get("/auth", Authenticate, AuthUser);
 
 // gets
 router_usuario.get("/", findAll);
-router_usuario.get("/", findOne);
+router_usuario.get("/:id", findOne);
 
 // login e cadastro
 router_usuario.post("/login", LoginUser);
