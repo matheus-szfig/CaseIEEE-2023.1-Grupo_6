@@ -31,7 +31,7 @@ router_usuario.patch("/update/:id", Authenticate, Authorize(['admin'], ['params'
 
 // delete
 router_usuario.delete("/delete/:id", Authenticate, Authorize(['admin'], ['params', 'id']), DeleteUser);
-router_usuario.delete("/inactivate/:id", Authenticate, Authorize(['admin'], ['params', 'id']), InactivateUser);
+router_usuario.delete("/inactivate/:id", Authenticate, InactivateUser);
 
 
 
