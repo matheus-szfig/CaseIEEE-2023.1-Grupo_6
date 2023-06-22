@@ -1,5 +1,6 @@
-html, body {
-  font-family: 'Poppins', sans-serif;
+html,
+body {
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -15,9 +16,8 @@ html, body {
   background-size: cover;
   background-color: rgb(24, 23, 23); /* Cor semitransparente */
   background-blend-mode: overlay;
+}
 
-  }
-  
 .loginform .header {
   width: 28.8rem;
   height: 10rem;
@@ -32,7 +32,6 @@ html, body {
   width: 5rem;
   height: 5rem;
   margin-bottom: 0.6rem;
-
 }
 
 .loginform .header h1,
@@ -40,7 +39,7 @@ html, body {
   font-weight: 800;
   font-size: 2.2rem;
   line-height: 1.2;
-  color: #0D5FAA;
+  color: #0d5faa;
 }
 
 .loginform form {
@@ -51,7 +50,7 @@ html, body {
   max-width: 25rem;
   height: 24rem;
   background: #fff;
-  border: 0.1rem solid #0D5FAA;
+  border: 0.1rem solid #0d5faa;
   border-radius: 0.32rem;
   box-shadow: 0px 0.128rem 0.128rem rgba(0, 0, 0, 0.25);
   margin-bottom: 2rem;
@@ -63,7 +62,7 @@ html, body {
   font-weight: 700;
   font-size: 2rem;
   line-height: 1.2;
-  color: #0D5FAA;
+  color: #0d5faa;
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
@@ -88,14 +87,14 @@ html, body {
   font-weight: 700;
   font-size: 1.4rem;
   margin-bottom: 0.4rem;
-  color: #0D5FAA;
+  color: #0d5faa;
 }
 
 .loginform .inputLoginform.emailBlock label {
   font-weight: 700;
   font-size: 1.4rem;
   margin-bottom: 0.4rem;
-  color: #0D5FAA;
+  color: #0d5faa;
 }
 
 .loginform .inputLoginform.emailBlock input {
@@ -105,7 +104,7 @@ html, body {
   height: 2.3rem;
   border-radius: 0.32rem;
   margin-bottom: 0.4rem;
-  background: #E6E6E6;
+  background: #e6e6e6;
   outline: none;
   border: none;
   padding-top: 0.5rem;
@@ -116,7 +115,7 @@ html, body {
   font-weight: 700;
   font-size: 1.4rem;
   margin-bottom: 0.4rem;
-  color: #0D5FAA;
+  color: #0d5faa;
 }
 
 .loginform .inputLoginform.passwordBlock .relative {
@@ -130,7 +129,7 @@ html, body {
   height: 2.3rem;
   border-radius: 0.32rem;
   margin-bottom: 0.4rem;
-  background: #E6E6E6;
+  background: #e6e6e6;
   outline: none;
   border: none;
   padding-bottom: 0.5rem;
@@ -139,7 +138,7 @@ html, body {
 .loginform form .button {
   width: 9.12rem;
   height: 2.1rem;
-  background: #0D5FAA;
+  background: #0d5faa;
   border-radius: 0.32rem;
   color: #fff;
   border: none;
@@ -172,9 +171,9 @@ html, body {
 .loginform form .footer .signupButton {
   width: 8rem;
   height: 1.75rem;
-  background: #CBC8C8;
+  background: #cbc8c8;
   border-radius: 0.32rem;
-  color: #0D5FAA;
+  color: #0d5faa;
   border: none;
   font-weight: 600;
   font-size: 0.9375rem;

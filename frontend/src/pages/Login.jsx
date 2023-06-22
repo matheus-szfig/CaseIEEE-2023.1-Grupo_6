@@ -20,10 +20,10 @@ const Login = () => {
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
     let input = document.getElementById("password");
-    if(showPassword){
-      input.style.paddingTop="0.94rem"
-    } else{
-      input.style.paddingTop="0.6rem"
+    if (showPassword) {
+      input.style.paddingTop = "0.94rem";
+    } else {
+      input.style.paddingTop = "0.6rem";
     }
   };
 
@@ -40,8 +40,8 @@ const Login = () => {
       if (response.data.status === true) {
         toast.success(response.data.message);
         setTimeout(() => {
-          navigate("/")
-          navigate(0)
+          navigate("/");
+          navigate(0);
         }, 1000);
       } else {
         toast.error(response.data.message);
@@ -53,9 +53,11 @@ const Login = () => {
 
   return (
     <div
-    className="loginform"
-    style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/background2.png)` }}
-  >
+      className="loginform"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/background2.png)`,
+      }}
+    >
       <header className="header">
         <img
           className="ieee-logo"

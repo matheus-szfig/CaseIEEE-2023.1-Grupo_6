@@ -1,43 +1,42 @@
-.container{
-    width: 100vh;
-    height: 80vh;
-    padding-left: 4rem;
-    font-family: 'Poppins', sans-serif;
-
+.container {
+  width: 100vh;
+  height: 80vh;
+  padding-left: 4rem;
+  font-family: "Poppins", sans-serif;
 }
-.header span{
-    position: absolute;
-    width: 9.5rem;
-    height: 5.3rem;
-    margin-left: 3.7rem;
-    margin-top: 7rem;
-    color: #0574BC;
-    font-weight: 700;
-    font-size: 3.1rem;
-    line-height: 0.7rem;
+.header span {
+  position: absolute;
+  width: 9.5rem;
+  height: 5.3rem;
+  margin-left: 3.7rem;
+  margin-top: 7rem;
+  color: #0574bc;
+  font-weight: 700;
+  font-size: 3.1rem;
+  line-height: 0.7rem;
 }
-.verificaVotoContainer{
-    position: absolute;
-    width: 21.2rem;
-    height: 34.4rem;
-    margin-left: 3.7rem;
-    margin-top: 14rem;
+.verificaVotoContainer {
+  position: absolute;
+  width: 21.2rem;
+  height: 34.4rem;
+  margin-left: 3.7rem;
+  margin-top: 14rem;
 }
-.verificaVotoContainer Span{
-    position: absolute;
-    margin-top: 0.6rem;
-    margin-left: 1.8rem;
-    color: #0574BC;
-    font-weight: 700;
-    font-size: 2.2rem;
-    line-height: 0.7rem;
+.verificaVotoContainer Span {
+  position: absolute;
+  margin-top: 0.6rem;
+  margin-left: 1.8rem;
+  color: #0574bc;
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 0.7rem;
 }
-.verificaVotoContainer .insideVerificaVotoContainer{
-    position: absolute;
-    width: 21.2rem;
-    height: 31.3rem;
-    margin-top: 3.1rem;
-    border: 0.1rem solid #CBC8C8;
-    border-radius: 0.32rem;
-    box-shadow: 0px 0.128rem 0.128rem rgba(0, 0, 0, 0.25);
+.verificaVotoContainer .insideVerificaVotoContainer {
+  position: absolute;
+  width: 21.2rem;
+  height: 31.3rem;
+  margin-top: 3.1rem;
+  border: 0.1rem solid #cbc8c8;
+  border-radius: 0.32rem;
+  box-shadow: 0px 0.128rem 0.128rem rgba(0, 0, 0, 0.25);
 }

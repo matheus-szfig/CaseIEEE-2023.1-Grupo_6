@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function SelectCargo ({disabled, id, name, onChange}) {
+export default function SelectCargo({ disabled, id, name, onChange }) {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
@@ -23,17 +23,17 @@ export default function SelectCargo ({disabled, id, name, onChange}) {
     }
   }
 
-
-
-    return (
-        <select 
-          disabled={disabled} 
-          id={id} 
-          name={name} 
-          onChange={onChange} 
-          className='w-[100%] h-[23%] p-2 border-2 focus:shadow-none hover:cursor-pointer rounded-[4px]'
-        >
-        <option className="text-gray-300" value="">-Selecione um cargo-</option>
+  return (
+    <select
+      disabled={disabled}
+      id={id}
+      name={name}
+      onChange={onChange}
+      className="w-[100%] h-[23%] p-2 border-2 focus:shadow-none hover:cursor-pointer rounded-[4px]"
+    >
+      <option className="text-gray-300" value="">
+        -Selecione um cargo-
+      </option>
       {options.map((option) => (
         <option
           key={option.id}
@@ -42,6 +42,6 @@ export default function SelectCargo ({disabled, id, name, onChange}) {
           label={option.nome}
         />
       ))}
-       </select>
-    )
-  }
+    </select>
+  );
+}

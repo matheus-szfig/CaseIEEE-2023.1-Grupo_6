@@ -4,10 +4,12 @@ import { database } from "../../../config/database";
 export async function findAllEquipes() {
   try {
     // Consulta ao banco de dados para selecionar os campos "id" e "nome" da tabela "equipes"
-    const equipes = await database("equipe").select("id","nome").orderBy("id", "asc");
-    
+    const equipes = await database("equipe")
+      .select("id", "nome")
+      .orderBy("id", "asc");
+
     // Retornando as equipes encontradas
-    return{equipes};
+    return { equipes };
   } catch (error) {
     // Em caso de erro, exibindo o erro no console e lançando uma exceção
     console.error("Erro ao buscar equipes:", error);
@@ -20,24 +22,24 @@ export async function findMembrosByEquipeId(equipeId) {
   try {
     //captura o id do usuario e o cargo dele a partir do equipeId
     const ids_membros = await database("v_c_usuario")
-    .select("id_usuario","cargo")
-    .where({"id_equipe" : equipeId});
+      .select("id_usuario", "cargo")
+      .where({ id_equipe: equipeId });
 
     //pega os ids dos usuarios da requisição acima e junta. Usado para filtrar os selects
     const id_usuarios = ids_membros.map((membro) => membro.id_usuario);
 
     //captura o id e o nome do usuario
     const usuarios = await database("usuario")
-    .select("id", "nome")
-    .whereIn("id", id_usuarios);
+      .select("id", "nome")
+      .whereIn("id", id_usuarios);
 
     // captura o id e o nome do cargo
     const cargos = await database("v_c_usuario")
-    .select("id_usuario", "cargo")
-    .whereIn("id_usuario", id_usuarios);
+      .select("id_usuario", "cargo")
+      .whereIn("id_usuario", id_usuarios);
 
     //verificação
-    if(usuarios.length<=0 || cargos.length<=0){
+    if (usuarios.length <= 0 || cargos.length <= 0) {
       throw new Error("Irregularidade. Equipe vazia");
     }
 
@@ -46,24 +48,26 @@ export async function findMembrosByEquipeId(equipeId) {
       const { id, nome } = usuario;
       const membro = cargos.find((membro) => membro.id_usuario === usuario.id);
       const cargo = membro ? membro.cargo : null;
-      return { id_usuario : id, nome, cargo };
+      return { id_usuario: id, nome, cargo };
     });
 
     //captura o nome da equipe
-    const nomeEquipe = await database("equipe").select({nome_da_equipe:"nome"}).where({"id" : equipeId});
+    const nomeEquipe = await database("equipe")
+      .select({ nome_da_equipe: "nome" })
+      .where({ id: equipeId });
 
     // Retornando os membros encontrados
     return {
-      status:true,
+      status: true,
       equipe_selecionada: nomeEquipe,
-      membros : info
-    }
+      membros: info,
+    };
   } catch (error) {
     // Em caso de erro, exibindo o erro
     return {
       status: false,
-			message:error['message']
-		}
+      message: error["message"],
+    };
   }
 }
 

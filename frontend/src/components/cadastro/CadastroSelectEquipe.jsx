@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function SelectEquipe({ disabled, id, name, onChange }) {
   const [options, setOptions] = useState([]);
@@ -29,9 +29,11 @@ export default function SelectEquipe({ disabled, id, name, onChange }) {
       id={id}
       name={name}
       onChange={onChange}
-      className='w-[100%] h-[23%] p-2 border-2 focus:shadow-none hover:cursor-pointer rounded-[4px]'
-    > 
-      <option className="text-gray-300" value="">-Selecione uma equipe-</option>
+      className="w-[100%] h-[23%] p-2 border-2 focus:shadow-none hover:cursor-pointer rounded-[4px]"
+    >
+      <option className="text-gray-300" value="">
+        -Selecione uma equipe-
+      </option>
       {options.map((option) => (
         <option
           key={option.id}

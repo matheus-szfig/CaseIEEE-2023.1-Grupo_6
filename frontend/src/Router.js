@@ -9,28 +9,28 @@ import Login from "./pages/Login";
 
 const routes = [
   {
-    path: '/',
-    element: <Home />
+    path: "/",
+    element: <Home />,
   },
   {
-    path: '/profile',
-    element: <Profile/>
+    path: "/profile",
+    element: <Profile />,
   },
   {
-    path: '/equipes',
-    element: <Equipes/>
+    path: "/equipes",
+    element: <Equipes />,
   },
   {
-    path: '/admin',
-    element: <Admin/>
+    path: "/admin",
+    element: <Admin />,
   },
   {
-    path: '/cadastro',
-    element: <Cadastro/>
+    path: "/cadastro",
+    element: <Cadastro />,
   },
   {
-     path: '/login',
-     element: <Login/>
+    path: "/login",
+    element: <Login />,
   },
 ];
 

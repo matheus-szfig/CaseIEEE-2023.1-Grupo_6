@@ -6,6 +6,4 @@ export default async function LoginUser(req = request, res = response) {
 
   const loginService = await loginUserService(email, senha, res);
   res.json(loginService);
-
 }
-

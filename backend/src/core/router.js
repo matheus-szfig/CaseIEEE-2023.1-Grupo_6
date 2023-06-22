@@ -9,5 +9,4 @@ router.use("/user", router_usuario);
 router.use("/equipe", router_equipe);
 router.use("/cargo", router_cargo);
 
-
 export default router;

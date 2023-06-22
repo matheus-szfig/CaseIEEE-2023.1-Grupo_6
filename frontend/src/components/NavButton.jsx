@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function NavButton ({title, icon, href}) {
+export default function NavButton({ title, icon, href }) {
   return (
     <div className="flex items-center">
       <li className="ml-1.5">
@@ -16,5 +16,5 @@ export default function NavButton ({title, icon, href}) {
         </Link>
       </li>
     </div>
-  )
+  );
 }
