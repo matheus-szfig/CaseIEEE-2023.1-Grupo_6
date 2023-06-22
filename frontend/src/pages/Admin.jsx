@@ -8,6 +8,7 @@ import ModalApproveCargos from "../components/admin/ModalApproveCargos";
 import ModalUpdateEquipes from "../components/admin/ModalUpdateEquipe";
 import ModalDeleteEquipes from "../components/admin/ModalDeleteEquipe";
 import ModalCreateEquipes from "../components/admin/ModalCreateEquipe";
+import ModalDeleteUser from "../components/admin/ModalDeleteUser";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         <ModalApproveCargos text={"Deseja aprovar o cargo deste usuário?"}/>
         <ModalUpdateEquipes />
         <ModalCreateEquipes/>
+        <ModalDeleteUser text={"Deseja deletar este usuário?"}/>
         <ModalDeleteEquipes text={"Deseja deletar esta equipe?"}/>
         <Navbar/>
         <div className='mx-5 mt-10 sm:mx-[4.5rem]'>

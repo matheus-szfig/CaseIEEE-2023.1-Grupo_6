@@ -12,7 +12,7 @@ import {
 	equipeDeleteAtom,
 } from "./ModalDeleteEquipe";
 
-export default function EquipeComponent({ id, nome }) {
+export default function EquipeComponent({ id, nome, buttonDisabled }) {
 	const [selected, setSelected] = useRecoilState(equipeSelected);
 	const [_ue, setUpdatedEquipe] = useRecoilState(equipeUpdateAtom);
 	const [_u, setUpdatingEquipe] = useRecoilState(updateEquipesModalShowAtom);
@@ -62,16 +62,19 @@ export default function EquipeComponent({ id, nome }) {
 				</div>
 			</div>
 			<div className="flex flex-col justify-center py-3">
-				<div className="flex">
-					<EditBtn
-						onClick={(e) => UpdateEquipe(e, id)}
-						className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary me-2"
-					/>
-					<CancelBtn
-						onClick={(e) => DeleteEquipe(e, id)}
-						className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary"
-					/>
-				</div>
+				{!buttonDisabled ? (
+					<div className="flex" >
+						<EditBtn
+							onClick={(e) => UpdateEquipe(e, id)}
+							className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary me-2"
+						/>
+						<CancelBtn
+							onClick={(e) => DeleteEquipe(e, id)}
+							className="bg-white hover:bg-gray-300 rounded h-8 w-8 font-bold hover:text-white text-primary"
+						/>
+					</div>
+					) :null }
+				
 			</div>
 		</div>
 	);

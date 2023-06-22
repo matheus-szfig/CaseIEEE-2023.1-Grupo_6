@@ -46,6 +46,12 @@ export default function EquipesTab() {
 			</div>
 			<div className="max-h-[55vh] md:max-h-[70vh] overflow-y-auto border-t mx-4">
 				<div className="flex flex-col justify-center mt-2 pb-2 mx-2">
+					<EquipeComponent
+						key={-1}
+						nome={"Geral"}
+						id={-1}
+						buttonDisabled={true}
+					/>
 					{listEquipes.map((e) => {
 						return <EquipeComponent key={e.id} nome={e.nome} id={e.id} />;
 					})}

@@ -27,7 +27,7 @@ export default function MembrosTab() {
 	useEffect(() => {
 		const members = listMembros.filter((v) => {
 			for (let i = 0; i < 3; i++) {
-				if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
+				if (v.cargos[i]?.id_equipe === parseInt(equipeSel) && v.cargos[i]?.aprovado === 1) {
 					return true;
 				}
 			}
@@ -44,7 +44,7 @@ export default function MembrosTab() {
 
 			const members = listMembros.filter((v) => {
 				for (let i = 0; i < 3; i++) {
-					if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
+					if (v.cargos[i]?.id_equipe === parseInt(equipeSel) && v.cargos[i]?.aprovado === 1) {
 						return true;
 					}
 				}

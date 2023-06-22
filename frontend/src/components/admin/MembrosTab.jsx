@@ -4,6 +4,7 @@ import UseApi from "../../hooks/useApi";
 import { atom, useRecoilState } from "recoil";
 import { equipeSelected } from "./EquipesTab";
 import MemberComponent from "./Membro";
+import MemberGeralComponent from "./MembroGeralComponent";
 
 function getParams(v) {
 	let params = new URL(document.location).searchParams;
@@ -20,12 +21,14 @@ export default function MembrosTab() {
 	const [equipeMembros, setEquipeMembros] = useState([]);
 
 	async function LoadResources() {
-		const { data } = await api.get("/user");
+		let { data } = await api.get("/user");
+		data = data.sort((a, b)=> a.nome.localeCompare(b.nome))
 		setListMembros(data);
 	}
 
 	useEffect(() => {
 		const members = listMembros.filter((v) => {
+			if (parseInt(equipeSel) === -1) return true;
 			for (let i = 0; i < 3; i++) {
 				if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
 					return true;
@@ -43,6 +46,7 @@ export default function MembrosTab() {
 			setEquipeSelected(idEquipe);
 
 			const members = listMembros.filter((v) => {
+				if (parseInt(equipeSel) === -1) return true;
 				for (let i = 0; i < 3; i++) {
 					if (v.cargos[i]?.id_equipe === parseInt(equipeSel)) {
 						return true;
@@ -67,7 +71,16 @@ export default function MembrosTab() {
 			<div className="max-h-[55vh] md:max-h-[70vh] overflow-y-auto border-t mx-4">
 				<div className="flex flex-col justify-center mt-2 pb-2 mx-2">
 					{equipeMembros.map((e) => {
-						return (
+						
+						return parseInt(equipeSel) === -1 ? (
+							<MemberGeralComponent
+							key={e.id}
+							nome={e.nome}
+							id={e.id}
+							cargos={e.cargos || []}
+							ativo={e.ativo}
+						/>
+						):(
 							<MemberComponent
 								key={e.id}
 								nome={e.nome}

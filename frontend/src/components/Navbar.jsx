@@ -19,7 +19,7 @@ const Navbar = () => {
 		},
 		{
 			title: "Admin",
-			href: "/admin",
+			href: "/admin?idEquipe=-1",
 			icon: process.env.PUBLIC_URL + "/AdminIcon.svg",
 			admin: 1,
 		},
