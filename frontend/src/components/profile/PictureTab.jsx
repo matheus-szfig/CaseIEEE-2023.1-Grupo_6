@@ -15,7 +15,7 @@ export default function PictureTab ({nome, img, id}) {
       <div className='flex justify-center'>
         <img className='relative left-3 border rounded-full w-2/4 ms-5' src={img}/>
         <span className='flex flex-col-reverse relative left-3'>
-          <EditBtn className='bg-gray/0 h-8 w-8 bg-white hover:bg-primary hover:text-white text-primary font-bold py-1.5 px-2 outline outline-4 -outline-offset-4 outline-primary rounded'
+          <EditBtn className='bg-gray/0 h-8 w-8 bg-white hover:bg-primary hover:text-white text-primary font-bold py-1.5 px-2 outline outline-3 -outline-offset-4 outline-primary rounded'
           onClick={UpdatePicture}/>
         </span>
       </div>

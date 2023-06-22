@@ -28,11 +28,11 @@ export default function EquipesTab() {
 
 
 	return (
-		<div className="rounded border border-light-gray h-[100%] p-3 shadow-md w-[100%] md:w-2/4 lg:w-1/3 xl:w-1/4 md:me-1 mb-5">
+		<div className="rounded border border-light-gray h-[100%] p-3 shadow-md w-[100%] md:w-2/4 lg:w-1/3 xl:w-1/4 md:me-1 mb-5 md:max-h-[70vh]">
 			<div className="w-[100%] flex justify-between px-4 mb-2">
 				<h3 className="mt-1 text-xl text-primary font-medium">Equipes</h3>
 			</div>
-			<div className="max-h-[55vh] md:max-h-[70vh] overflow-y-auto border-t mx-4">
+			<div className="md:max-h-[60vh] max-h-[60vh] overflow-y-auto border-t mx-4">
 				<div className="flex flex-col justify-center mt-2 pb-2 mx-2">
 					
 					{listEquipes.map((e) => {
