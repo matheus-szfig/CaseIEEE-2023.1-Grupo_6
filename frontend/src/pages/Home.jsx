@@ -13,7 +13,7 @@ const Home = () => {
   const api = useCallback(useApi, [])();
 
   async function votacao() {
-    const resp = await api.get("/user/votacao/");
+    const resp = await api.get("/votacao");
     setVotacoes(resp.data);
   }
 
