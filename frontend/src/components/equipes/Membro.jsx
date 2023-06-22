@@ -21,6 +21,7 @@ export default function MemberComponent({ id, nome, cargos }) {
 					.map((c, i) => {
 						return (
 							<div
+							 	key={c.id_equipe}
 								className={`flex justify-between px-2.5 py-2
 							${!!c.aprovado ? "bg-primary" : "bg-primary-light"}
 							${!!(i !== 0) ? "border-t" : ""}`}

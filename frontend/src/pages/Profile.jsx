@@ -239,9 +239,10 @@ const Profile = () => {
 							<div className="flex flex-col justify-between mt-4 px-5 border-b pb-8 border-gray-400">
 								{Array.from({ length: 3 }).map((_, i) => {
 									return !cargos[i] ? (
-										<EmptyRole />
+										<EmptyRole key={i} />
 									) : !cargos[i].aprovado ? (
 										<DisabledRole
+											key={`${userInfo.id}_${cargos[i].id_cargo}_${cargos[i].id_equipe}`}
 											active={cargos[i].active}
 											id_usuario={userInfo.id}
 											id_cargo={cargos[i].id_cargo}
@@ -252,6 +253,7 @@ const Profile = () => {
 										/>
 									) : (
 										<ActiveRole
+											key={`${userInfo.id}_${cargos[i].id_cargo}_${cargos[i].id_equipe}`}
 											active={cargos[i].active}
 											id_usuario={userInfo.id}
 											id_cargo={cargos[i].id_cargo}
