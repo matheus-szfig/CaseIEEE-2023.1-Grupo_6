@@ -12,9 +12,6 @@ import Authenticate from "../middlewares/authentication";
 import InactivateUser from "../controllers/users/inactivate";
 import LogoutUser from "../controllers/users/logoutController";
 
-import findAllvoto from "../controllers/users/getVotacao";
-import create from "../controllers/users/criarVotacao";
-
 const router_usuario = Router();
 
 // auth
@@ -45,8 +42,5 @@ router_usuario.delete(
   DeleteUser
 );
 router_usuario.delete("/inactivate/:id", Authenticate, InactivateUser);
-
-router_usuario.get("/votacao", findAllvoto);
-router_usuario.post("/cadastervotacao", create);
 
 export default router_usuario;
