@@ -2,7 +2,7 @@ import { database } from "../../../config/database";
 
 export async function deleteUserService(id) {
   try {
-    const user = await database("usuario").select("*").where({ id, ativo: 1 });
+    const user = await database("usuario").select("*").where({ id });
 
     if (user.length === 0) {
       throw new Error("User not found!");

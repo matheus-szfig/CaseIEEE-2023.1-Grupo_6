@@ -1,34 +1,37 @@
 import { atom, useRecoilState } from "recoil";
-import CancelBtn from "./CancelButton";
+import CancelBtn from "../profile/CancelButton";
 import UseApi from "../../hooks/useApi";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export const removeCargosModalShowAtom = atom({
-	key: "removeCargosModalShow",
+export const updateEquipesModalShowAtom = atom({
+	key: "updateEquipesModalShow",
 	default: false,
 });
 
-export const cargoRemovingAtom = atom({
-	key: "cargoRemoving",
+export const equipeUpdateAtom = atom({
+	key: "equipeUpdate",
 	default: false,
 });
 
-export default function ModalRemoveCargos({ text }) {
+export default function ModalUpdateEquipes({ text }) {
 	const navigate = useNavigate();
 	const api = useCallback(UseApi, [])();
 
-	const [show, setShow] = useRecoilState(removeCargosModalShowAtom);
-	const [cargo, setCargo] = useRecoilState(cargoRemovingAtom);
-
-	async function RemoveCargo(e) {
+	const [show, setShow] = useRecoilState(updateEquipesModalShowAtom);
+	const [equipe, setEquipe] = useRecoilState(equipeUpdateAtom);
+    const [equipeNome, setEquipeNome] = useState("")
+	async function updateEquipe(e) {
 		e.preventDefault();
 
 		try {
 			const prom = new Promise(async (exec, reject) => {
 				try {
-					const resp = await api.post("/cargo/take", cargo);
+                    //console.log(equipe)
+					const resp = await api.patch(`/equipe/update/${equipe.id_equipe}`, {
+                        nome: equipeNome,
+                    });
 
 					if (!resp.data.status) {
 						reject(resp.data.message);
@@ -41,8 +44,8 @@ export default function ModalRemoveCargos({ text }) {
 			});
 
 			toast.promise(prom, {
-				pending: "Removendo...",
-				success: "Cargo removido com sucesso!",
+				pending: "Atualizando...",
+				success: "Equipe atualizada com sucesso!",
 			});
 
 			await prom;
@@ -59,7 +62,7 @@ export default function ModalRemoveCargos({ text }) {
 					className="absolute bg-black opacity-60 w-full h-full"
 					onClick={() => {
 						setShow(false);
-						setCargo(false);
+						setEquipe(false);
 					}}
 				></div>
 
@@ -73,24 +76,35 @@ export default function ModalRemoveCargos({ text }) {
 							className="flex justify-between border-b w-[100%]"
 						>
 							<h3 className="font-bold text-primary text-2xl py-2">
-								Remover Cargo
+								Atualizar Equipe
 							</h3>
 							<CancelBtn
 								className="bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 my-1 px-3.5 outline outline-4 -outline-offset-4 outline-primary rounded"
 								onClick={(e) => {
 									e.preventDefault();
 									setShow(false);
-									setCargo(false);
+									setEquipe(false);
 								}}
 							/>
 						</div>
-						<form className="mt-3 w-full flex flex-col" onSubmit={RemoveCargo}>
-							<p className="text-md">{text}</p>
+						<form className="mt-3 w-full flex flex-col" onSubmit={updateEquipe}>
+							{/* <p className="text-md">{text}</p> */}
+                            <label htmlFor="nome" className="text-md">
+                                Novo nome da equipe:
+                            </label>
+                            <input
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                value={equipeNome}
+                                onChange={(e) => setEquipeNome(e.target.value)}
+                                className="mt-1 px-2 py-1 border border-gray-300 rounded"
+                            />
 							<button
 								className="mt-5 bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded"
 								type="submit"
 							>
-								Remover
+								Atualizar
 							</button>
 						</form>
 					</div>

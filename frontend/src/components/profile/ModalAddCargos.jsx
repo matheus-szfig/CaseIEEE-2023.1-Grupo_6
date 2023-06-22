@@ -81,32 +81,34 @@ export default function ModalAddCargos () {
 
   return !!show ? (
     <>
-      <div id="modal-background" className="absolute bg-black w-[100%] h-[100%] opacity-60 z-10"
-      onClick={(e) => setShow(false)}/>
-      <div className="flex justify-center">
-        <div id="modal-body" className="absolute w-[90vw] sm:w-[25rem] z-20 bg-white p-5 rounded mt-20">
-          <div id="modal-header" className="flex justify-between border-b w-[100%]">
-            <h3 className="font-bold text-primary text-2xl py-2">Adicionar Cargo</h3>
-            <CancelBtn className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 my-1 px-3.5 outline outline-4 -outline-offset-4 outline-primary rounded'
-              onClick={(e) => setShow(false)}
-            />
+     <div className="fixed top-0 left-0  w-screen h-screen z-10">
+        <div id="modal-background" className="absolute bg-black w-[100%] h-[100%] opacity-60 z-10"
+        onClick={(e) => setShow(false)}/>
+        <div className="flex justify-center">
+          <div id="modal-body" className="absolute w-[90vw] sm:w-[25rem] z-20 bg-white p-5 rounded mt-20">
+            <div id="modal-header" className="flex justify-between border-b w-[100%]">
+              <h3 className="font-bold text-primary text-2xl py-2">Adicionar Cargo</h3>
+              <CancelBtn className='bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 my-1 px-3.5 outline outline-4 -outline-offset-4 outline-primary rounded'
+                onClick={(e) => setShow(false)}
+              />
+            </div>
+            <form className="mt-3 w-[100%] flex flex-col" onSubmit={AddCargo}>
+              <select className="mt-3 text-lg w-[100%] rounded" onChange={e => setEquipe(parseInt(e.target.value))}>
+                <option defaultValue value={-1}>Selecione uma equipe</option>
+                {listEquipes.map(v => {
+                  return <option key={v.id} value={v.id}>{v.nome}</option>
+                })}
+              </select>
+              <select className="mt-3 text-lg w-[100%] rounded" onChange={e => setCargo(parseInt(e.target.value))}>
+                <option defaultValue value={-1}>Selecione um cargo</option>
+                {listCargos.map(v => {
+                  return <option key={v.id} value={v.id}>{v.nome}</option>
+                })}
+              </select>
+              <button className='mt-5 bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded'
+              type="submit">Adicionar</button>
+            </form>
           </div>
-          <form className="mt-3 w-[100%] flex flex-col" onSubmit={AddCargo}>
-            <select className="mt-3 text-lg w-[100%] rounded" onChange={e => setEquipe(parseInt(e.target.value))}>
-              <option defaultValue value={-1}>Selecione uma equipe</option>
-              {listEquipes.map(v => {
-                return <option key={v.id} value={v.id}>{v.nome}</option>
-              })}
-            </select>
-            <select className="mt-3 text-lg w-[100%] rounded" onChange={e => setCargo(parseInt(e.target.value))}>
-              <option defaultValue value={-1}>Selecione um cargo</option>
-              {listCargos.map(v => {
-                return <option key={v.id} value={v.id}>{v.nome}</option>
-              })}
-            </select>
-            <button className='mt-5 bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded'
-            type="submit">Adicionar</button>
-          </form>
         </div>
       </div>
     </>

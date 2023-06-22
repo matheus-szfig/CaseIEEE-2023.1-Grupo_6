@@ -5,7 +5,7 @@ export default function NavButton ({title, icon, href}) {
     <div className="flex items-center">
       <li className="ml-1.5">
         <Link
-          className={`flex items-center h-16 px-2
+          className={`flex items-center h-20 px-2
           text-white hover:underline
           hover:bg-black/20 `}
           to={href}

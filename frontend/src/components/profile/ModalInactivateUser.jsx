@@ -1,34 +1,35 @@
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import CancelBtn from "./CancelButton";
 import UseApi from "../../hooks/useApi";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { authInfo } from "../Auth";
 
-export const removeCargosModalShowAtom = atom({
-	key: "removeCargosModalShow",
+export const inactivateUserModalShowAtom = atom({
+	key: "inactivateCargosModalShow",
 	default: false,
 });
 
-export const cargoRemovingAtom = atom({
+export const userInactiveAtom = atom({
 	key: "cargoRemoving",
 	default: false,
 });
 
-export default function ModalRemoveCargos({ text }) {
+export default function ModalInactivateCargos({ text }) {
 	const navigate = useNavigate();
 	const api = useCallback(UseApi, [])();
+    const userInfo = useRecoilValue(authInfo)
+	const [show, setShow] = useRecoilState(inactivateUserModalShowAtom);
+	const [user, setUser] = useRecoilState(userInactiveAtom);
 
-	const [show, setShow] = useRecoilState(removeCargosModalShowAtom);
-	const [cargo, setCargo] = useRecoilState(cargoRemovingAtom);
-
-	async function RemoveCargo(e) {
+	async function InactivateUser(e) {
 		e.preventDefault();
 
 		try {
 			const prom = new Promise(async (exec, reject) => {
 				try {
-					const resp = await api.post("/cargo/take", cargo);
+					const resp = await api.delete(`/user/inactivate/${userInfo.id}`);
 
 					if (!resp.data.status) {
 						reject(resp.data.message);
@@ -41,8 +42,8 @@ export default function ModalRemoveCargos({ text }) {
 			});
 
 			toast.promise(prom, {
-				pending: "Removendo...",
-				success: "Cargo removido com sucesso!",
+				pending: "Inativando...",
+				success: "Usuário inativado com sucesso!",
 			});
 
 			await prom;
@@ -59,7 +60,7 @@ export default function ModalRemoveCargos({ text }) {
 					className="absolute bg-black opacity-60 w-full h-full"
 					onClick={() => {
 						setShow(false);
-						setCargo(false);
+						setUser(false);
 					}}
 				></div>
 
@@ -72,25 +73,25 @@ export default function ModalRemoveCargos({ text }) {
 							id="modal-header"
 							className="flex justify-between border-b w-[100%]"
 						>
-							<h3 className="font-bold text-primary text-2xl py-2">
-								Remover Cargo
+							<h3 className="font-bold text-red-600 text-2xl py-2">
+								Inativar Cargo
 							</h3>
 							<CancelBtn
-								className="bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 my-1 px-3.5 outline outline-4 -outline-offset-4 outline-primary rounded"
+								className="bg-gray-100 hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 my-1 px-3.5 outline outline-4 -outline-offset-4 outline-red-600 rounded"
 								onClick={(e) => {
 									e.preventDefault();
 									setShow(false);
-									setCargo(false);
+									setUser(false);
 								}}
 							/>
 						</div>
-						<form className="mt-3 w-full flex flex-col" onSubmit={RemoveCargo}>
+						<form className="mt-3 w-full flex flex-col" onSubmit={InactivateUser}>
 							<p className="text-md">{text}</p>
 							<button
-								className="mt-5 bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded"
+								className="mt-5 bg-gray-100 hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-red-600 rounded"
 								type="submit"
 							>
-								Remover
+								Inativar
 							</button>
 						</form>
 					</div>

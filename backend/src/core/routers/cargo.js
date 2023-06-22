@@ -12,9 +12,9 @@ const router_cargo = Router();
 
 router_cargo.post('/give', giveCargo);
 router_cargo.post('/take', takeCargo);
-router_cargo.post('/create/', createCargo);
+router_cargo.post('/create', createCargo);
 router_cargo.get('/get/', getCargo);
-router_cargo.delete('/delete/:id/', deleteCargo);
+router_cargo.delete('/delete/:id', deleteCargo);
 router_cargo.patch('/approve', Authenticate, Authorize(['admin']), approveCargo);
 
 export default router_cargo;

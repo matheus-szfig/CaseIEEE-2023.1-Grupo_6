@@ -1,34 +1,34 @@
 import { atom, useRecoilState } from "recoil";
-import CancelBtn from "./CancelButton";
+import CancelBtn from "../profile/CancelButton";
 import UseApi from "../../hooks/useApi";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export const removeCargosModalShowAtom = atom({
-	key: "removeCargosModalShow",
+export const approveCargosModalShowAtom = atom({
+	key: "approveCargosModalShow",
 	default: false,
 });
 
-export const cargoRemovingAtom = atom({
-	key: "cargoRemoving",
+export const cargoApprovingAtom = atom({
+	key: "cargoApprove",
 	default: false,
 });
 
-export default function ModalRemoveCargos({ text }) {
+export default function ModalApproveCargos({ text }) {
 	const navigate = useNavigate();
 	const api = useCallback(UseApi, [])();
 
-	const [show, setShow] = useRecoilState(removeCargosModalShowAtom);
-	const [cargo, setCargo] = useRecoilState(cargoRemovingAtom);
+	const [show, setShow] = useRecoilState(approveCargosModalShowAtom);
+	const [cargo, setCargo] = useRecoilState(cargoApprovingAtom);
 
-	async function RemoveCargo(e) {
+	async function approveCargo(e) {
 		e.preventDefault();
 
 		try {
 			const prom = new Promise(async (exec, reject) => {
 				try {
-					const resp = await api.post("/cargo/take", cargo);
+					const resp = await api.patch("/cargo/approve", cargo);
 
 					if (!resp.data.status) {
 						reject(resp.data.message);
@@ -41,8 +41,8 @@ export default function ModalRemoveCargos({ text }) {
 			});
 
 			toast.promise(prom, {
-				pending: "Removendo...",
-				success: "Cargo removido com sucesso!",
+				pending: "Aprovando...",
+				success: "Cargo aprovado com sucesso!",
 			});
 
 			await prom;
@@ -73,7 +73,7 @@ export default function ModalRemoveCargos({ text }) {
 							className="flex justify-between border-b w-[100%]"
 						>
 							<h3 className="font-bold text-primary text-2xl py-2">
-								Remover Cargo
+								Aprovar Cargo
 							</h3>
 							<CancelBtn
 								className="bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 my-1 px-3.5 outline outline-4 -outline-offset-4 outline-primary rounded"
@@ -84,13 +84,13 @@ export default function ModalRemoveCargos({ text }) {
 								}}
 							/>
 						</div>
-						<form className="mt-3 w-full flex flex-col" onSubmit={RemoveCargo}>
+						<form className="mt-3 w-full flex flex-col" onSubmit={approveCargo}>
 							<p className="text-md">{text}</p>
 							<button
 								className="mt-5 bg-gray-100 hover:bg-primary hover:text-white text-primary font-bold py-2 px-4 outline outline-4 -outline-offset-4 outline-primary rounded"
 								type="submit"
 							>
-								Remover
+								Aprovar
 							</button>
 						</form>
 					</div>

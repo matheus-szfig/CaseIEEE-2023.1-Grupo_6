@@ -62,13 +62,14 @@ export function AuthContext ({children}) {
       const authData = data.data;
       setAuth(authData);
     }catch(e){
+      console.log(e)
       setAuth(false);
     }
     setReady(true);
   }
 
   useEffect(() => {
-    AuthUser ();
+    AuthUser();
   }, []);
 
   return (
