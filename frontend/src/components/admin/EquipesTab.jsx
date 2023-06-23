@@ -9,7 +9,7 @@ import {
 } from "./ModalCreateEquipe";
 
 export const equipeSelected = atom({
-  key: "equipeSelected",
+  key: "equipeSelectedAdmin",
   default: null,
 });
 

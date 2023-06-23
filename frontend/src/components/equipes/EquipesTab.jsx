@@ -5,7 +5,7 @@ import UseApi from "../../hooks/useApi";
 import { atom, useRecoilState } from "recoil";
 
 export const equipeSelected = atom({
-  key: "equipeSelected",
+  key: "equipeSelectedEquipe",
   default: null,
 });
 

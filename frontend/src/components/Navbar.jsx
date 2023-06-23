@@ -28,14 +28,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`
-        bg-primary-dark
-        flex
-        h-20
-        items-center
-		px-4
-		
-      `}
+        className={`bg-primary-dark flex h-16 items-center px-4`}
       >
         <img
           className="h-12 mx-2"
