@@ -1,0 +1,186 @@
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.loginform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh; /* Altura igual à altura da tela */
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(24, 23, 23); /* Cor semitransparente */
+  background-blend-mode: overlay;
+}
+
+.loginform .header {
+  width: 28.8rem;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.loginform .header .ieee-logo {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 0.6rem;
+}
+
+.loginform .header h1,
+.loginform .header h2 {
+  font-weight: 800;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  color: #0d5faa;
+}
+
+.loginform form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  max-width: 25rem;
+  height: 24rem;
+  background: #fff;
+  border: 0.1rem solid #0d5faa;
+  border-radius: 0.32rem;
+  box-shadow: 0px 0.128rem 0.128rem rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.loginform form h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #0d5faa;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.loginform form .titleLine {
+  margin-bottom: 1.4rem;
+  left: 0;
+  width: 15rem;
+  height: 0.0625rem;
+  background-color: #000;
+  border: none;
+}
+
+.loginform form .inputLoginform {
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 0.4rem;
+  max-width: 20.64rem;
+}
+
+.loginform form .inputLoginform label {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+  color: #0d5faa;
+}
+
+.loginform .inputLoginform.emailBlock label {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+  color: #0d5faa;
+}
+
+.loginform .inputLoginform.emailBlock input {
+  padding: 0.96rem;
+  width: 100%;
+  max-width: 22.4rem;
+  height: 2.3rem;
+  border-radius: 0.32rem;
+  margin-bottom: 0.4rem;
+  background: #e6e6e6;
+  outline: none;
+  border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.loginform .inputLoginform.passwordBlock label {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+  color: #0d5faa;
+}
+
+.loginform .inputLoginform.passwordBlock .relative {
+  position: relative;
+}
+
+.loginform .inputLoginform.passwordBlock .relative input {
+  padding: 0.96rem;
+  width: 100%;
+  max-width: 22.4rem;
+  height: 2.3rem;
+  border-radius: 0.32rem;
+  margin-bottom: 0.4rem;
+  background: #e6e6e6;
+  outline: none;
+  border: none;
+  padding-bottom: 0.5rem;
+}
+
+.loginform form .button {
+  width: 9.12rem;
+  height: 2.1rem;
+  background: #0d5faa;
+  border-radius: 0.32rem;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  margin-top: 0.8rem;
+}
+
+.loginform form .button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.loginform form .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.loginform form .footer p {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 0.75rem;
+  color: rgba(60, 136, 185, 0.91);
+  margin-right: 0.5rem;
+}
+
+.loginform form .footer .signupButton {
+  width: 8rem;
+  height: 1.75rem;
+  background: #cbc8c8;
+  border-radius: 0.32rem;
+  color: #0d5faa;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 0.75rem;
+}
+
+.loginform form .footer .signupButton:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

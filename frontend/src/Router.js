@@ -1,20 +1,46 @@
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Equipes from "./pages/Equipes";
+import Admin from "./pages/Admin";
+import Cadastro from "./pages/Cadastro";
+import Login from "./pages/Login";
 
 const routes = [
-  // {
-  //   path:'/exemplo',
-  //   element: <Exemplo />
-  // },
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/equipes",
+    element: <Equipes />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+  },
+  {
+    path: "/cadastro",
+    element: <Cadastro />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
 ];
 
 function Router(props) {
   return (
     <BrowserRouter>
       <Routes>
-        {routes.map((v) => {
-          return <Route path={v.path} element={v.element} />;
-        })}
+        {routes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
       </Routes>
     </BrowserRouter>
   );

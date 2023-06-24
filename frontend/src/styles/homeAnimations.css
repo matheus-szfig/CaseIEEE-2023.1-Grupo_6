@@ -1,0 +1,9 @@
+#equipeMembros {
+  overflow: hidden;
+  max-height: 0vh;
+}
+
+#equipeMembros.active {
+  overflow: visible;
+  max-height: 100vh;
+}

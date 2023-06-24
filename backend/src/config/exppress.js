@@ -5,9 +5,9 @@ import router from "../core/router";
 
 const app = exppress();
 const corsConfig = {
-  origin: "*",
+  origin: process.env.CORS_ORIGIN,
   credentials: true,
-  methods: ["POST", "GET", "PUT", "DELETE"],
+  methods: ["POST", "GET", "PUT", "DELETE", "PATCH"],
 };
 
 app.use(cors(corsConfig));
