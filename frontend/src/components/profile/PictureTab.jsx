@@ -3,6 +3,7 @@ import EditBtn from "./EditButton";
 import UseApi from "../../hooks/useApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+
 export default function PictureTab({ nome, img, id }) {
   const api = useCallback(UseApi, [])();
   const navigate = useNavigate();

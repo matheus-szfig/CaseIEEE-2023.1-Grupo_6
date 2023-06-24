@@ -10,8 +10,12 @@ export async function deleteUserService(id) {
 
     await database("usuario_equipe").where({ id_usuario: id }).delete();
     await database("usuario_permissao").where({ id_usuario: id }).delete();
+
     await database("voto_equipe").where({ id_usuario_ator: id }).delete();
+
     await database("voto_usuario").where({ id_usuario_ator: id }).delete();
+    await database("voto_usuario").where({ id_usuario_alvo: id }).delete();
+
     await database("usuario").where({ id }).delete();
 
     return {

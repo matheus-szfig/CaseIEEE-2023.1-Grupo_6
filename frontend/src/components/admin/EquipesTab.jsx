@@ -3,6 +3,7 @@ import AddButton from "./AddButton";
 import EquipeComponent from "./Equipe";
 import UseApi from "../../hooks/useApi";
 import { atom, useRecoilState } from "recoil";
+
 import {
   createEquipesModalShowAtom,
   equipeCreatingAtom,

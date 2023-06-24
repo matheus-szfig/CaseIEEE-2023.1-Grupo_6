@@ -7,7 +7,13 @@ module.exports = {
         primary: {
           DEFAULT: "#0574BC",
           dark: "#0D5FAA",
+          darker: "#16528a",
           light: "#5b7287",
+        },
+        graph: {
+          fst: "#0574BC",
+          scd: "#6995b3",
+          trd: "#526c7d"
         },
         gray: {
           DEFAULT: "#CBC8C8",

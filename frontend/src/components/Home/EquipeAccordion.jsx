@@ -86,7 +86,7 @@ export default function EquipeAccordion({id, nome, members}) {
       </div>
       <div id="equipeMembros" className={`px-5 ${open? 'active' : ''}`}>
         {equipeMembers?.map(u => {
-          return <Member id={u.id} nome={u.nome} cargoString={u.cargos}/>
+          return <Member key={u.id+u.cargos} id={u.id} nome={u.nome} cargoString={u.cargos}/>
         })}
       </div>
     </>
