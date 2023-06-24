@@ -3,13 +3,14 @@ import AddButton from "./AddButton";
 import EquipeComponent from "./Equipe";
 import UseApi from "../../hooks/useApi";
 import { atom, useRecoilState } from "recoil";
+
 import {
   createEquipesModalShowAtom,
   equipeCreatingAtom,
 } from "./ModalCreateEquipe";
 
 export const equipeSelected = atom({
-  key: "equipeSelected",
+  key: "equipeSelectedAdmin",
   default: null,
 });
 

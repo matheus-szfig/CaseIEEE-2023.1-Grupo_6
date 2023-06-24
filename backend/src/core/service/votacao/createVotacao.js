@@ -1,12 +1,11 @@
 import { database } from "../../../config/database";
 
-export default async function createVotacao(id, titulo, data_inicio, data_fim) {
+export default async function createVotacao( titulo, data_inicio) {
     try {
         await database("votacao").insert({
-            id,
             titulo,
             data_inicio,
-            data_fim
+            data_fim: null
         });
         return {
 			status: true,

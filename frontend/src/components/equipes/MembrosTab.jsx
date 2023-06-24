@@ -72,7 +72,7 @@ export default function MembrosTab() {
       </div>
       <div className="md:max-h-[60vh] max-h-[60vh] overflow-y-auto border-t mx-4">
         <div className="flex flex-col justify-center mt-2 pb-2 mx-2">
-          {equipeMembros.map((e) => {
+          {equipeMembros.filter(e => e.ativo).map((e) => {
             return (
               <MemberComponent
                 key={e.id}

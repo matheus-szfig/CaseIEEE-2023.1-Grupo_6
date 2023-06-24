@@ -12,7 +12,7 @@ export const inactivateUserModalShowAtom = atom({
 });
 
 export const userInactiveAtom = atom({
-  key: "cargoRemoving",
+  key: "userInactive",
   default: false,
 });
 
