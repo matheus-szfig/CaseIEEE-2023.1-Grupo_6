@@ -72,16 +72,19 @@ export default function MembrosTab() {
       </div>
       <div className="md:max-h-[60vh] max-h-[60vh] overflow-y-auto border-t mx-4">
         <div className="flex flex-col justify-center mt-2 pb-2 mx-2">
-          {equipeMembros.filter(e => e.ativo).map((e) => {
-            return (
-              <MemberComponent
-                key={e.id}
-                nome={e.nome}
-                id={e.id}
-                cargos={e.cargos || []}
-              />
-            );
-          })}
+          {equipeMembros
+            .filter((e) => e.ativo)
+            .sort((a,b) => a.nome.localeCompare(b.nome))
+            .map((e) => {
+              return (
+                <MemberComponent
+                  key={e.id}
+                  nome={e.nome}
+                  id={e.id}
+                  cargos={e.cargos || []}
+                />
+              );
+            })}
         </div>
       </div>
     </div>

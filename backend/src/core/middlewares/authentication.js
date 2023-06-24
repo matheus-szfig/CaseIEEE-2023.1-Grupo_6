@@ -21,12 +21,10 @@ export default async function Authenticate(
 
     next();
   } catch (e) {
-    res
-      .status(401)
-      .send({
-        status: false,
-        message: "Token de acesso inválido ou inexistente!",
-      });
+    res.status(401).send({
+      status: false,
+      message: "Token de acesso inválido ou inexistente!",
+    });
   }
 }
 

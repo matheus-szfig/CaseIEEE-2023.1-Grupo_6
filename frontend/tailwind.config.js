@@ -13,7 +13,7 @@ module.exports = {
         graph: {
           fst: "#0574BC",
           scd: "#6995b3",
-          trd: "#526c7d"
+          trd: "#526c7d",
         },
         gray: {
           DEFAULT: "#CBC8C8",

@@ -14,11 +14,11 @@ export default function MemberComponent({ id, nome, cargos }) {
       </div>
       <div className="border-2 rounded mb-3 mt-1">
         {cargos
-          .filter((c) => c.id_equipe === parseInt(selected) && !!c.aprovado)
+          .filter((c) => ((c.id_equipe === parseInt(selected)) && !!c.aprovado))
           .map((c, i) => {
             return (
               <div
-                key={c.id_equipe}
+                key={c.id_equipe+'_'+c.id_cargo}
                 className={`flex justify-between px-2.5 py-2
 							${!!c.aprovado ? "bg-primary" : "bg-primary-light"}
 							${!!(i !== 0) ? "border-t-2" : ""}`}

@@ -9,5 +9,5 @@ export const database = knex({
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
   },
-  pool:{min:3, max:4}
+  pool: { min: 3, max: 4 },
 });

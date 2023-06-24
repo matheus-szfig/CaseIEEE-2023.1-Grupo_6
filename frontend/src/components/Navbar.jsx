@@ -27,9 +27,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav
-        className={`bg-primary-dark flex h-16 items-center px-4`}
-      >
+      <nav className={`bg-primary-dark flex h-16 items-center px-4`}>
         <img
           className="h-12 mx-2"
           src={process.env.PUBLIC_URL + "/RamoLogo.svg"}
