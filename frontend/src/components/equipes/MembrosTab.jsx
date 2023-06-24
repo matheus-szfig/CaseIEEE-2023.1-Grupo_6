@@ -74,7 +74,7 @@ export default function MembrosTab() {
         <div className="flex flex-col justify-center mt-2 pb-2 mx-2">
           {equipeMembros
             .filter((e) => e.ativo)
-            .sort((a,b) => a.nome.localeCompare(b.nome))
+            .sort((a, b) => a.nome.localeCompare(b.nome))
             .map((e) => {
               return (
                 <MemberComponent
