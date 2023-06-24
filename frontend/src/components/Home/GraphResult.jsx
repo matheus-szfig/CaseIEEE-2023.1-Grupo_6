@@ -9,7 +9,7 @@ export default function GraphResult({ votacao }) {
   const api = useCallback(UseApi, [])();
 
   async function getVotacaoData() {
-    const votos = await api.get("/votacao/" + votacao.id);
+    const votos = await api.get("/votacao/" + votacao?.id);
 
     const vUsers = votos?.data?.usuarios
       ?.sort((a, b) => {
@@ -24,7 +24,7 @@ export default function GraphResult({ votacao }) {
 
     const vEquipes = votos?.data?.equipes
       ?.sort((a, b) => {
-        return parseInt(b.qnt) - parseInt(a.qnt);
+        return parseInt(b?.qnt) - parseInt(a?.qnt);
       })
       .splice(0, 3)
       .map((e, i) => ({ ...e, lugar: i }));
@@ -39,7 +39,7 @@ export default function GraphResult({ votacao }) {
 
   useEffect(() => {
     getVotacaoData();
-  }, []);
+  }, [votacao]);
 
   function getColor(lugar) {
     const mapColor = ["bg-graph-fst", "bg-graph-scd", "bg-graph-trd"];
@@ -59,20 +59,14 @@ export default function GraphResult({ votacao }) {
         </div>
 
         <div className="flex w-full gap-1">
-          {votosEquipes.map((e) => {
-            console.log(
-              "equipe:",
-              e.id_equipe,
-              getColor(e.lugar),
-              getSize(e.lugar)
-            );
+          {votosEquipes?.map((e) => {
             return (
               <VelaGraph
-                nome={e.nome}
-                cor={getColor(e.lugar)}
-                tamanho={getSize(e.lugar)}
-                qnt={e.qnt}
-                key={"e" + e.id_equipe}
+                nome={e?.nome}
+                cor={getColor(e?.lugar)}
+                tamanho={getSize(e?.lugar)}
+                qnt={e?.qnt}
+                key={"e" + e?.id_equipe}
               />
             );
           })}
@@ -87,19 +81,13 @@ export default function GraphResult({ votacao }) {
 
         <div className="flex w-full gap-1">
           {votosUsuarios.map((u) => {
-            console.log(
-              "usuario:",
-              u.id_usuario,
-              getColor(u.lugar),
-              getSize(u.lugar)
-            );
             return (
               <VelaGraph
-                nome={u.nome.split(" ")[0]}
-                cor={getColor(u.lugar)}
-                tamanho={getSize(u.lugar)}
-                qnt={u.qnt}
-                key={"u" + u.id_usuario}
+                nome={u?.nome.split(" ")[0]}
+                cor={getColor(u?.lugar)}
+                tamanho={getSize(u?.lugar)}
+                qnt={u?.qnt}
+                key={"u" + u?.id_usuario}
               />
             );
           })}
